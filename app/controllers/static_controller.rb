@@ -9,5 +9,6 @@ class StaticController < ApplicationController
   end
 
   def about
+    render html "Hello World!"
   end
 end

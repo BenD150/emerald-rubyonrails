@@ -1,6 +1,10 @@
 class User < ApplicationRecord
-  has_many :microposts
-  validates :name, presence:true
-  validates :email, presence:true
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+  belongs_to :team
+  has_many :scores
+  has_many :comments
+  has_many :projects
 end
-
