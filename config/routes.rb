@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :projects
-  resources :comments
-  resources :scores
-  resources :teams
   devise_for :users
   get 'static/Pages'
   get 'static/home'
