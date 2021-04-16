@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+</head>
+<body>
+<div>
+  Hello
+  <% @students.each do |x| %>
+    <%= x %>
+  <% end %>
+  The first student's name is <%= @students[0].first %> <%= @students[0].last %>
+  The second student's name is <%= @students[1].first %> <%= @students[1].last %>
+</div>
+
+<div>
+
+</div>
