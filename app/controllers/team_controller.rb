@@ -5,6 +5,16 @@ class TeamController < ApplicationController
   def get_students
     @students = Student.all
   end
-  # The POST request expects JSON with a value that can be made into a new database record.
 
+  # The POST request expects JSON with a value that can be made into a new database record.
+  def create
+    @team = Team.create(params[:name])
+    render json: @team
+
+    @students.each do |student|
+      @student_team = StudentTeam.create(student: student, team: params[:team])
+    end
+    render json: @student_team
+  end
 end
+

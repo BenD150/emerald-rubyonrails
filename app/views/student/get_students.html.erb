@@ -6,12 +6,9 @@
 </head>
 <body>
 <div>
-  Hello
-  <% @students.each do |x| %>
-    <%= x %>
+  <% @students.each do |student| %>
+    The student's name is <%= student.first %> <%= student.last %>.
   <% end %>
-  The first student's name is <%= @students[0].first %> <%= @students[0].last %>
-  The second student's name is <%= @students[1].first %> <%= @students[1].last %>
 </div>
 
 <div>
