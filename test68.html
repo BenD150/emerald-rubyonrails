@@ -1,99 +1,67 @@
+<!-- idea: 
+https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css
+Drop down info buttons with each button being a different team name:
+Team Baker Systems
+Team X
+Team Y
+Team Z
+
+... in each drop down button, there is a display of the team members horizontally aligned with two numbers followed by it,
+a number from 1 to 5 rating the average of their peers evaluations of them as a team member, followed by the score of their self evaulation. the bigger the difference,
+the more indication of an issue. then underneath each name is another drop down button that when clicked displays a bulleted list of comments given by their peers-->
+
 <!DOCTYPE html>
 <html lang= "en">
 <head>
-  <link rel="stylesheet" href="testevalform.css">
+  <link rel="stylesheet" href="bootstrap.css">
   <script src="evalform.js"></script>
   <meta charset= "UTF-8">
-  <title> Student Assignment to Teams</title>
+  <title> Peer Evaluation Tool </title>
 </head>
 <body>
-  <p align="right"><button onclick="event1" data-inline = "true" >Create</button> </p>
+  <p align="right"><button onclick="event1" data-inline = "true" >Submit</button> </p>
   <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbsAAAByCAMAAAD9J4/kAAABnlBMVEX///8AWEzx8vLDx1CkU5zBT1Fft1JZvL0AT0IAVUkAUkUATT8AAAAAT0EASz0AVkkARjeKqaTI2tjZ4N/w9vW4xsP3+Pg5c2pbwsPIzFJhvFRxkYpzmJLm8O+yyMSqxcFFeG8pbGKAnJYAXlJcjYVYg3yUsaxRe3MiaF1XtrdFf3bp7+7d5+aCpqChvbkaal+oq0iSS4vOzs4TAA8kICHi4+OoR0m7TU8eAAC8wE6XmUJPkkWxsLHCwsNaq04AGhtPoaI5NTeCgzw8ZTVWoUuampsbABrR4d9JKSt+fX19OTtWUFFzPW1NnJ2ERX1hNlw4JzVua3AAABwsKSN9fjpVVC4xLiQYEhQLEACSlEBLh0EvQSpFej0AABEqNCZBHR5gMDGVQUNWLS9HQEYAOSaDg4MaLS44amskQUI/QT4pFCVEhIYwJC1NL0kbHRhGLEJkZCwvLQwUDgAnIw5GRB9JSCtDQSpfXzFpaiwYIhI1VDAySS0fGwAsOigcFyEgOBkmFhg1Cw4YJxJESUoqT1AxIyRfX14qNTYCGAA0GTBsb4tpAAAgAElEQVR4nO1d+18S2fsHuuzcYABpUAOEBhEFzQi8FF5IiUzLNWut1jbLTE2z3f20bdt+1vWzFe7+199zmTnnzDA3lPb1/aHnh0JghjPnfZ77c57j87VPperK4b1m5QRXtkeNC4mheN6vZoaGL0Rj7V07kjWS9beKw5GTUI7+zOUMpsvRNh8umx0CwxqCl6aYt6MXvFMbvxYoVetTpWpzv/z2/bXRH5+U2hxte1QYzsucIPN+v1+WBU5Wh1JJ71craY5nSAhaT+2FMCe0T8HL5AaRoP4LNqvDjlJhMrhQH/N+f1j0SKHLtjc3U2Cr9vNPb3/6Wfru0eSZHkD3978k5xXiIoSNEi+I+UjB8+VBw8V+Lmf5tajpa96Iz5Ab5MgN5DZWFqCsQG4nstglBMufdB6FMylTtf88Gp08Mzn66F15tOcMoJ63K0pbw/VMRXDfkZDFaDk14vEnU6LxUjlu+bVTYxchNwharw4bYteWATvzwD2NwoEq1YWa9OsZhBj498d71+DLnhtSs53heqbcEPgnzVuON6h60ystyzdsqS87iB3vXYT5WH41YVfoIN8FqitPpLc/PvkRI4fQu38Pcd7odz8ttjNeb1TMvAC6u6jK1iOWwwkPN4mljZfzocsNq+91UGb6w5a/YE3KALM0Ddj5Elz7o7CmqSfALjnT8+CXMwz1/PIA/je6Ovq22WmxGRUEtQhEh/2kcnF3rVc0QCeL6ZT19zrId37hkven7GIBMmJXlC0ljuMoLKkiPYJ2yShmNILd6OEoxK48euanDuu8nMAL/T6DKm8hIV90u80IqzV4/4jdIDvJd7zq3Y0ZtsfOFw3ZiBz7UVjS1q9Ys72bPGNgvHfvexB2PZOdBQ8uY2QS+p3GjzjTkVjoeb+9ijwZdrIldn5xxOtjxuLs47HYKQD/lOppVC7YBTaxVfLrrz1G7H58ALH7DjgLADyvI3anYTjoUBeUnOwgW4Yt5J3FZixD50bmMdARK7EJ/LsTkEjNEhY7fsDrcxoez4BdMQtYoZgQgkGj48k7eplWFMDuAGYzFrv373rO9Fz7Dr6e7JzBkoOSDomeCJYpAieGQ6oqh0XBCKAQd+T2KPNtHnFdSrC0cWLRExG1SiIsiwS7PD5owh47fxpKXiWViyQoZfuHsokWGnb8jYqE+e6XH8189wvA7v4vPRi8BY9DdqFoGM11P4DlMph8XvT353AsJdl3KRMyoMc5hjFyVJ2IyO1KiDwfbzOq5olYvvNzXkxgQEre8CwG7FTOXZt7orr0AGH3/sEZI3YPwPs9DzRunJSqnfixgoqeCJprybBf5tJ97GTHUmlDoEVwUi5D5JsIMSULsRQ6MydGMmDHZ7wtj5TREDNix/N+7+EjB1p8fw8alD2PykZbZXL1UQ/455rmrb/vCOMlguRJRkQunjJLRWUkb7BA7OcpRi0dEWo57DJ5NyV8MUJu3zRg5w96Cw9nHbED/JvvH+5rw1u0osrq6I/ISpk8vGHwEW6UJ3smb3w3qWH3qBPY6fo7BAZ9MTxspc+SQ4xp7SCgqCkgQ70YxeE179HiWNyvauTGqwZ95xeGvNxeMYX7WrDz80DRvzidmKi/7Rl9Aq2VnhuHjIPXM3m4+u7ek8OrDybd+K5UnQp4/LEhbcLDii9mG/jqZ/y2sO3DUXWHeE2ToLJHiQax42VMfrcJNPKdn/cy4X0mF6AVO7SGT4fd5o2envvfIYAerBLweia/e3f/0ei1/cAidh16ftyi11QXa/tXNVq7Kv32UPLmQ+imIa8CzWc/7KyXOEaGqDsRwFUI6xd4TbEB7PQbtMd3/mDEw+2HTE7Pl8CugqIn75CNOfmgjCIsPT1nrq2+m4Qv/ltdfKQlFKitsvBwbh3QdUgfrs5Nn5+ef7jl8BuEdLOZtw74E6K48KqNSld0sLCYTOkiynOkvw3szHynut+9YM6QfAnsqm9R/KsMdF0PcMTv/XL/2ui1+78c/jqJbc2aFm3pkUgWduvn+V6d5g4f954/f773uuQhSRvTxyy42NkNaoeEbIKUNI3CwVnp0//k0x4f/OTY+UPuvJ0zB5u/BHZN5AP0XLt348yNX+69e/T+u8N791bfa8Kz58E9je0e7etXVKXrEC5IvXM3H+PXvR823XUeMS9skqSU6KMLF62/EaHfgM9PoJQdTFMDnVxmejCIlJbs1pfAThrFII0+OVy9gcRkD8yY62pvVQ9yEveuIq0T6K7r0J0/P/1z3fW3yHwH3Sz5WF5nPD5jKTQVEizEEqxARahHhdcOdiETEkG39dEwikyeE8Odx670syYSH9X2rzEuAsJwcvQ+zsCe6blf069Y+VOH6/z8TR1GID2vX3WVmiQA6YodkyOw9rapPtHkL5kOzosl4WsLu2giHuRY+FyVqiEexofSuVSK+ZEOYVf9VQPrbX2FuHc9PaOj9x/89J/V2v4vGleuTWkXFPaJxDz/+/cYuOnr63Prj/90DXmSx+dslBilAokoiZaucB9Vd/hz4gp7TW23gR1g8+JwPkhD33zaOa9SYMLkfjFulgQdwq6uY3e/1nygeQej79/ubq7Up0qVksZ2Z37dX1zBTlxJmtZZ7fHNefRq/YfyD9//sVqW3KQmkWs2BV0sDTvrRrqwVRybGCH6z7rwoYXaws4HS9qYXIfLA1yglgovt1bfUOzE02BX0fTdmTOPDiFQPZM33h4uTJUCiqIElPp/dEOlVKrXagsVYGRqInN+/fEfH+DL6e9frc8DJKevf3ABL0nkXNA9FtQIa1mQkGVqgHgRursRpa66K1PjWxDsZI8T2KDhOhdDmcbDZLmv9eMOYedb0SPQPZPv7t2YvC8tVgFuAUSVQ2xkTv63DqBUSltSs7Q4h7F7tX94OA9eTq/+MK2ZmsBRcPTyqAIX3bFThjVKWOnGYrBlFqnd6a0soQ3sImoCrYdkhgjmvFOxH/GFgFBE0CVHsmxZbqewC2j4oAjmvScrJR24QEDZeovZ7v0i/lsJ1MtXkboD8rJau/k9ePnHH0T9ne+dd+S8KMXutNF+6kOEdHVIAhkeSxoZ7NwychFREHm4hAqkOMox5p2io4MCv5gNcUKIuaBT2PmqP9NA2Oi7zRKBLtC1j5OyoxJ5U5k6mMeO3eHa+nx5rne9PH2eUu+6UylulNgXYnslqq3UT9Wd/vTUgQ55yq60wXfw1jyXTjLLzzEyRJYRCluPCHCw3JfAzlf/mXLe5PvDekAxst2Zt1uUFet/YpR+KM/3Qvfuh7ne8yz95cB4qY5hlyR2HD+gWwI0ryBaqJhWoti5xpbxskA1GKR+iLcX+0nDc+ZENNYvg52v+uTHSYLetf82KxiqrkOcT390r0BYUdHU3TxyygH3Hc4boOud27T/HWrXi6fMblOcBFITECNehVvETft+e3wHpx8m+3Vj08GNJCYvHJxuQ1ljFzx1qriyKN3QQyk9kw+eTEHwlJUH2FD5uUrFaGAfhy/nbiIIe//4YdqI3fV9+9DYCJFqp8WOBsSYcCej8Lzcvh19F6Q/potmWbb9un5jFJ5LC18WO1j38B8SVel5JK1UoMiUfoXs+GuTQqeUbmKsvl/F2D3+47yRnKwV6oKdFjuaZ5DpnajC8ySJGJnpFTuo5Ah72wXJfUXdjYWsSeoLO4hdpcQaFZXaQv0qEZzAOKkDvJSuFen+mWuHjPWiVH9D2M2XD+ewuWniOyBMJVvG6xjfJfX7+Pkh6vjSMmTXUDekE2Dn9zeoxrMNSBOVCM0oEkOwxo4rwmrNFnKK2lQWjo+OmyTbHShvAaQWD25MasHLTaThlMDU5tv/1BmJqSx8wObkZukVDGX2Xi+bZOZ6+XfbNGzHsKNlPKzWoQYMKrp2o5NgxwEnrUGCstbmLAkboFEQQW7EjtwDYBfJxE2Utze2SivS02djzzakjzg3oOyuIKSqtZ+QUzApTemmZqDepIYK+LuG2e3PBd/UVaj5pg+vG+zM3t8/zEtTNr/LCLXTlVnTYnFDJo04DrKj56xRG9iRgaPYqr5DxG63n+5GoPgOyYfYYzds2ACK9lnaOY8VgNzYOUjjt/H+rIWahkyljlTc2xVGSgYMhFN38w+nFKW6Nt97vvfD9yx2vfOvrvfO1WyQ6Rh2NGxhuBF12D3E3E7Edyj/of+MTUCa1AagjH/ene+GW3ZlcNbYUeQgjR0twlxqhbje4OP7N54EbEiZkrCFso9smd/Os2kgbMPAzIJd/QNTHXQq7JIkps0bSra6aLzUuZoY0QnsTDypZPNcyGqFkAQI9lQ6h11lC0jLcwyNSVultSlWo00tSlXFDrv6Xwi7D5gxmx8A463T9Gvv+Q9Q/fU+rlmbK53Cjsn/GMQWTdjabIA10ImxI7LZ0o8kAQgszjuEXaC6UpZuj58z0NhaecsAlVKp2rFdILDy5/x0b+95jK7ShZTd+s25aVS6cn7++zLy1OcfWmdhcx3yEWj+x5SKuUhnwV3htROLJjITrRU9L8xbbXbRjRM+j9ZnZ7CbOp54vnGr/HljzADesxY2s+M6QAu1w78+PH58WNHY8CGSoOXVufXrj9d/P/weZxTm16yDmrnO2JnKZaLuBOMn1IEU3PNAbcTEKN8h7GI6awVb7cEimX9kASvUkzsFdlXpNuKzZ7dmbhnE5u2ZKQe0zLCWqs2rUlP/u4YchfNzNw9v3ix/0EzO3rlFa5HYIR+haKPu2E88hMVOwneajNbTcxY1aWR94s3NsY5gt3ibiMmNmVtj554R/tuY6fIMXgDl8XRvHdguyL2bXl3HUhNbMnZOwkhn9B1l3xbZQmbKQwnlKbAjOq01IK3LBK3yIqZaleiYsAu6+AiVMiMqx24dPC9/XNPfeV6ueAcP4UdebSIrs3f9kJgrDtnzDmFHtRpvrjygmjDkqvBO5CNooQDB9DchcwjMC3atvnnGKItLawY1d1uqlz7qcI4/bTpBZcd/ARIj650+hIx3fnp+/Y9y2c69Y2Wm28Q6EK1C4vNm0dtHPTzXPNBJ6jP1MA7x4fymbxL5x+O1Q6N39tgpFmS4aekIAjU+PjaODM1nB+Xy8cFnHTxpq03oFlbqU5UKQHDzMQBteu5wdW7uw/flwx/mrv9su0+vryPY0cqJ1tBX0lz550Anwk7zG0kOylwhrWeI9L1CXrBzpdLE+DlgpgAqPwemyu3PY2PPns98HteNzXpbUrNS/vM3SdpfXKg3f1h/PPfDZlX6/cOHuevzUHzajoHJ33kYsR3R/I9FlWcbCo9i530Pl44dSWSYlgjdFaHZuR3Bbup/Y7dmNp6NjY89A6bKuecb2MSk4Nk65FYCsyQBb2D+8fqHv25C2q9uXdWMlWl7tmPz5h5GbEf91ENo1VNU4dlv/tLoVNiRBSQYxBuRpXpA1Q07T9t062vlW7pbPvb582dkdY7fqq2Nt+8pkPgKJFhX+/tva/q2hLma/RgY7E5uqySpurPYW37Be+cvgp18AuyIG2eoOYqRVaWzY2ewkzYYU+XWDHLxxmql5pGm8zbKFe/YrXxgisMQu2l/TD902JUe7UTNA22WYpVAK6rkU5s9KIQIdvwJsCPcb9C5RCmQeE9HsFt8ygbDxsuI7559VAKLGLzxDanknfE2140VRgTHOafdQAx2J99nTaWiZZldRtTbo9ht3NPpdNiR/RLs7OuBTplkGNyw4z2UtFVmDLGUc7fLEMoNGFNG4I0/f9mGzCztP4b81ordtGMzCFqfyXnYq6OY/teI2e5qNeWpnE4RF96m2Llm+yywK+hWEX2LClIqr92wkz1gV/2fMQY9XoZYPkXWZfNofPzpcTuxlVJNkv5cv36+14QfYDsnRUate5sElWG+XoQxvTCEJsn8WKq7duh02JEIATMMmqIliHQCu+btc0a6BdXfBOa1xaOjxTYjK4Hq1qYk/bV+fZrBr3feefNrzLjN2JHo5kPj9oILhtJ1VOqhnMzwobbKibAjQoTmMojjQJ/ODTu/B+w+mrHbeA6YbwKpOKWy2yy0BV0AxcUqU1vNfekv5NWhFNDjhy4dA+j2Udltvhs0umWQr1lDBe0lNU9Ia8eNo0rpIUAu7cgIdi4bsqyxUy7LJqSIw86sNiomOojd8+cwa17COFQKLkg54FevvVr788Pc+oc/1za3XCaBRjJsC+R0os1Bjf27mI3oBZ+SYQK4uN+G9gpFdJ172BDsXC1SS+yIi0cic9Tno1/qBHYrVjJzrNx1IswM+Pm2FirVhc3NlWrJdcM5rZVzq+RK0gCJQaIVicqEO0ZamikYyCUsRrBzXUfW2DV0DaDHUPIWsZZOYFd9amGrjNU0l65dgWkAb8t7vyOmK6FLqwTKdkaURwzqbsSxZbbLfiAdOz7jqi8tsaPpHlxgQaQ8u+G9E/quJBmz5chH0LFTSqfCro3Wmkw9s+OMMd1KjfERqu7gar/YkrU0kqMXqWEnh939FWvsyDrC65CUj+WZ73QEu7VbBrY7gDJ07HMXYrq6tHByzlO2PHXFwcQ0Kgk6SDSF6QEuGJ6OUXcxNhNgSc6eCL5a8FAdYYMdwQULSb3dlmGxdcJHKB2VmZjY+C0U20T6TqmsrN1uM41gwG7BvTcHoQLTU1KwDTjG6O46kzdBPUSYl6bKxJrMJRGmX4nLvCD0A950LCGHZI0dFQLIatY0tDE62omY2NTTZ0ws+tYMrl05KinKVO3p2Lnba21EVUzYrbSBnaHLjN02uViWUWNGvUgrzeAsRh1NFfglp6HEMqKahXcvZL37d4Y8OQl8o+ichp1RP7th52XXy9T/xsc+z9x+Nn5uHOaAcDgT+Hd6jHqj3EY000iL7fRELTDSkLfuwViMM/ia+h1ShhQusJk8G3LsxhDLXUCYRVX1hNiRnQeoCaRW3Ge0Wt2w89KjY+p/0EBBuVdYJnYLuwxP601Ji3M+r3lPIxjYrlJr67SnFLKsZYELheKJXOvIlWFDD6GgYVop8jKc736R7ZMt8/oLynfubXJiw2HLMksD2WBH90XA4iCcdzXt/XPFzkPz6fpTrOjGxpC9qWF3a4bUt99uK/kawFUVgUqpVC3X6/WVlbpXBBMhMaTGL+UaVjzXiKgGXjJt16BCEtnlkUuXLl28BP/p7+8fivdjGqKt7V27BhRzec66RNZAdtgVyQZmtJ0ZNs8xVdO7YuchKF9ns3daNHN842BDV4G31xyqoVsIQlZfaC5u1j6Xy8cvd3Y+fdpZ26x7OrFLSfQVCybcwDKIJYvR3IDf0PnJz5k8eJr/aeUoRV/vCuNIOHUNUHKJtMrJNuXNBsrZYKeQHD7Scn1qUOaMoiRJ8oknx27LhF356cbG5wOSF9o4aKvkYUWSZl7ufNreu3NndnZw8Jvu7u5vZrdnPrfXDVyJFVO54YuAaQYGBuJ5OcSZTH7B3AaONsdz1GS0RYZT14BYnsPi9eTYMcEBJCGKCb8pyO6GHQx9Ri86UcQ3NcHEVcaez9S2Fmc+E3f9+UFbZqaysIPwgpBR6h7c89JDEz9StC93Me4Pi+hsBxSDbHXVeNXkW9OkuHPahvoOTmExYmmcXGb6YkygCNko5ma8XrBLhZxOUBzyKTU9KDZ2Gxa1H318SThx/Gm7tbX1HRY0it4nb8etFdRwSAwKLgfi8C2+zwWH6j4DEY0nX3bo894B7Nh+fWGrfWNJEkywqRPLtTTjN5I8hFo5bDy7vXGrPIM2k4xvEHk5dvSxPegAdi8HLbG7I3nr+V+Iux8hZnGWE9VjLhvKmTY59nZcR7BjXUyupV+fO3ZQMDiGGCB2PqW6KB0837g9ZtrE9eyo2SZ0AWXKGrtvutc8+ulK1qzbTMQH+1ulItle5xedTesGbfZo7yV0BDtmCy64EZ82s3nMBjtyCTxdyCm0J2sObn3NnAmChZkLbacRlKmZ2W++GWRJw27bZgdQK42oTpJC8FswFj3/R24pZjfNGN1qYC9cT4Jda4d2wzlphjA0/hGb/QjkSWAEbYQJRthh55sqPzWmE86dKJKpTEk7n3ZeAjoGVC6X145nMXizkueTfYv9op3C48W4VQaAyf+4ZUuJGnKoAesMdg1DJKEl+O2GHQqnKXH7dUyw8wWakoH1NqTaSaLQlTqman1ie2+7PFFvbmPjpftlG8HNVCZkNWYhlLcO7dMTB1xbFlOrxj553hnsfOxBbq0LxRU7xKoN+1MoZSYoWJWeE4U3/vS4NCWZYmGKFyz13Sr1HegrbNc2j+/MQoehe6+to9ZSWUEUmHHLsiDKF+2SMjRCHXab7IIqaJUQQduqpg5hR6WBlfXrip2MElVRvx3nsdj5uhYnsIk5/mxiEUi4TcN2c6VSdQhKa5Ew+mXpTjfyDY7K5aPj7TvfdM+utXeWfWHkYlrlQkFUDSuq6USfrSZLvQhpFHbfGHkpPYApbYsd9FS027nFonMkJd6KXcEf1sf1ojUSEOP0T1+w2AXRu/iu6Mj0YjooBsmxiUF8LD0anKHrgVI/eD42dvv5xPEWLDAprdHmmIHS1q60YotdBUbCVpq0v1jzUzf263YGB2f3do6O9wbbEZraeJJdF0Zyw7mRVFfRyQQpdBHyEHy32crGEr2fm4FVKOpkwaFFx/vQD5lLFe0xMKGHVhojEb1TbyTX19eXuhC1etZSU5qpLegdqbY+6shVm9KrpSXbbJCyKEkvdz59knza31UJ2ZfdexOzUF52z25P7Ox8dJmHr3RKYoPByu6CL6D4KvUD6fXds2fPvtqyww6wGaBZSa9yOdpDEnNwYq9bD4ttT9j0ePhKX4Qqa1VlCrLcWURLqzaZPGUFichBrdtYpbaNodsp37kzqKN356CDp/p+JVeqru2uIZbD9Ep3GxSlwhZwKgsojDn4EuccmjuDEKtPa0fHx0flT7PdelzsK+P9a1TZ2t1fvnKW0nJZt1wWartsu6otHIL+hITqAoqLbR/t7M0CQ+XOp4ltLTC200bd2Fc6DQUWDnRhienK67VFJDSB5fLPErspT6m/REJyG3aF2JKAmOzentj7Bpua3XtHn7S42Feh+e9QZfXVXQNyb6QmVGdKdU1aBp+8YSo3leoMwm6vBsSnBGQkMDDvkGRQ950jrP8+degw7a/kTIHdf1jk7v4jNfHZFsqUhMToXamLwQ75BFCjNWegcTJLDEzdVQD/ztq2Pv1KnSSl+Y+B59boqSSVVSxJGY9BKWF/bnCi9glC1719bEzBfgI+xOzLryLzX6H6VWqjXHl9cFBlz5PBsC4xtX8lCaULuieOkUsweLxnwA4wHnAYPGeBvtJpqLB6l0XuzZvdKsnl6ULz7FWaaKiUcfjyuIz4b7Y8a0y9Dk7Mfqp99RD+FSqVdbZ7La0eLAMmkxaJ0FQOsNBc3iV8V6lpoWdkonTvtWB39MlztdFXOh1VDjTslnenPi7jV9LHKa3NmyY0r5CtCkqhhoNgexMvB4FTMNGK3Vc75d+igC4zl3ZLhzoLLh/u1tHJhbrQfL0IfQbFV6k2JzTsaoszd/YmPpXvmLBzPXjyK3WMdjWv/O7D3TfUaFn6p/xxYapLtzTvPixVKqV6s1zbWsTpceAk1NeAV368bbJVJPefVLqGswP9iRGa2mikALFfiaZSbCKsYPo4RemCnpOJpcwEf8r0VlS/OyGLlE4hPmCgtLdDLDtKysUB97a7TSwol8pv3pTZsNiVpdc3y7urGp5vdndr5UXAjL4FnK8bXFtZONrr7t4uG9lux90rj8Zh36EgJ8pZHb1IWBRfMIm7pBoSXzDGaiIsvmCSWLFMSNQpJOaH0ZVFkb6JPoB9LQt5w5thnIW9FGa+lk+YU4EF7ahSXtuZEnbvBNNxUtKi485BRAtIpS39DSC8u3+wvLS8vEziY1fuLmvqcEmaquC5xEEx4J1vb8OU3eDRttE3d7UxU4LAiZeH4qoocHpxBywoYAsCYFOuMMUulpd5trQO1oDhvLIYDHK8iFrTFIPgD/AnLA6EJMLMeiEDvklJx07wcxp04HLOXGJSUC8j8vvxC9XTWXqdpViac8eu+goquN8QXlf2/y5/+/rb3/5+TRhwH7PlWdJoqippyYJuJC+77zCBFSAxXbcjJAVZwK2iGv2C3uESYsdWeqQFnsUuJWaygp/yJcAuTF6P8Dze+5zEJPL92isfwk5NMoTvcUkI03urvGC9VSjKezoP6suQJ+xKwDdfwtAtPXyDMbv77YHu9b35VjNf9Fx4RZolSB1hVtse7MZZvG0PhkqEE8gyzgpaW+AIpw7x9Fykoj+f4Rnshrh0I8S0fWOxgyV2MlttEmIXAcSudQwAO3rzZJ4XLXel/P/HrlK+e+VvBN3yAU0mLOvgvdFeXCFe2yIRkjhZDny84+07s7Oz2y+9bAIaEugekKKg7dCKcP4+joIzEupPMNNbFIIRnyqQk0FN2IFbsi0x2sUO/Lh1vWALdkqxWDSUJMWKRba+BtXFFLTiE/hhUX9fMb3wkRfwW4rhDgV0PcXOodwm8HHpzWvEbAdsHkhTdFf2DzSh+UpPyZWkWT1BvoeCK4DfjmGRmNR0bYwDKC7QXaGx/jg2piKcHI3TnXaZ0Ag7vTmOawCxSvdsmbBLCCJTgdk2dinRukeqGbu+tCrIjGVTiIA3gv6M/k4xno4VEnm/HIc6IRdX/So2xhJpbUTZdD+WLbl0Ag2gmMjIfjWdU/RfuOiLqP54isFuJJ22Nzibr37Dmu31WZa+PXizBKTpx61DDUwSX27uENukvK1l7gZn77z0VpaZ4ITWVQ6wa4xwer/tZFgosNOrCmnF1+DoZiwz3/Gn4ruE4Inv+kNBThBE0a95DA1VhNvPOCGoSeyusBBVwxx4J9TvGwoDUwwYYxCrXAifoaCEBLxPUsmE0IahqBwUwR04MY7vkAun+8L4KG0du76w6NCrcEtC/Hb3bwN0gA1fl/8uHyzqXt9yU3/cADAt8bY7xuDQPL4AAAe0SURBVFDp/mRzeJOZGkFgWpj1C+S7pKgLTSAy2emNhtAcZgSi1YzYRTlDo/329Z1svVvfiF1WDGWjwInMc1rT1rzA54q+WHRI0NrEwCPAxEg0lvLz/ng4G01G0wIHP2rIQSQXUiFtIwpwZ+AMNMK8P5eMNcByxtZSLqiqQiIB7V4Nu75wMO4Q2K+vYWyMbHf2bHkJ+HjflnVBSvnOVzqSdrZhbRFw746wAO3e/uw1AJ0Tgdvkz440DCpHjvri3AD+awgsvIt0ehMC6o0zEiRTibDDB2vGGiOyLLL80YJdlJK2xeGSEEpqlxdTwFSxFkoG7KJhra9KLCOgUlfAEJrNBd5ASwdgh9kqBVwQfEsBd9ZMc8g3Ada0kMZTgA75jQta16VcCD9BjuNhlS18cIxdKsQ5Nhisv8IyctmEHXrj7j5RgIzTHahuNWtrMy93tveOj2chE+61EcXsy4gCLwTlTCKqjwthNyJiR6sYAhYnxS6m9cZJqmSLDcCOz+Cmi3l/UBAMfT7M2Plpm7+gNhGXBD6fwZerQUHMWgslA3YXBf1E4BERHfPTNzBEevdlNOy0s4FgK3L82RDeQTjMwTiBAiDEm3X70WpphHWfVdGMAKDYdS8WYZfyc05cR7FbMmH3GjLiXZJm+MdUPhSolOoLzc3amgRYcNvdr2ModiGbkYPAzwv2N/THB9gVte7PkVDWx2A3Imq9KLOC3qYY+ubQseYEngeq3iiBW7CTLbBDvjkHe3mocTvPm8WukOH0wviAoMl2HXHATsgC6QppNk8sL2hV6AkOYRcNwSMOY0GxoULNnFQ5+ES5IJHVOQ5t8MwFieKG2EUBmzpvVCvheHMLdsj6vKKnGc7aoFMpVTcnJj63mzuIRUeAZS8LmnmCsAMyBD6ykg71sdgNCDx+ERX05lQAOw62g07kBbllo6knmclFwOXDGYG/bB+rZLErynz/iNaDWqW7SZLRkUtxGZ8MCrDj8M0odsNBhF0hD+FOheO+OBSOURHx8CXOT1W6iNEk2+tjaSHDy669fXHRw2uzzCwvs9j9s2rPvCdt+JvKC5qSxtiNiPA0rKIIUSPYdQlAuGJS/WHNdSK2SkQQzBGtdmyVlGAwUY3EYgd0Gaf1rg4HQ3jrX6o/iP/2u2HnuyhmYVeZiC8RBJ8kcKjyIkf6GCbD6KdyIjXH0rIMFjfnEgavfITlYEtlI3RX/r5Csbv76qM3K9IDMVJASfO4+yHGrohimkhkUuwSHB/UttEI+h5zxs4Elo9pC09bdmZKlIN202PEju+PEEJSdkgMhoTMxVwDcIsbdn0hHqARSvkuhAQFuK/oexe5yzp2jZCGHTGYAXZCupghWtaWUBnmgVFoLqNg2BWk75akhU5VoOQyLJ+kRDw9GDtfPxcHuCDxoWMXy/OqvjkmoR/CyfoIWUEwmmLt+QgRUW5tSIDJIDNbfMAc+J0Ukjg5zhW7GBeKFgUx5iuowWhDxpqCkZkprNMN2AkA2VSQc88EdS3UpH22MPru3ygWhmyV1wedy6eOiOyhfJrrpmPXJ4ZjDUGF49exS3HMXsV+Aa9YFruCyouGHXFt+ncZ3tw5iQyOtVXyVPUU0C4cVdB95oQ7dsCxz6VC8CjDATE3Ekqj94CBQmwVbLYYsEP+XVawjrUaKVBdfUXBu6uFwoCPcOVVe53enCkaYs80AMNnZKav4BdTWGQS7IYE5lzHlIaLwTfvC8l+tuVDm9hFgSS2lpoGH6Ff0FvSRV/IcH94GDY8hqSosjt2uVA2K0IHcVgcGtLWWiNMlqXuI7RglwyaGsvZkLIoEUf8b81TX36zJDU7JS8RXeaFLDGvVG1mNeyA0Mzm8ULTsCsKPLvp0y+jZjnGuEpcwB6vRu3GVRJB3lqpGLBLhbVWkAr4beg/h3ktkhAR3W0VXzGs4h5aqZCf17vODwl+zFQ5EcPZih38yMM57T542JO0vLS09PqARFO+XTtor0GYKxWhZxCJFmPFKJi1MH5aHbs+kdfWmYZdLmg48SfCoeiGEbskcNyYwIoJO1m9wBK6uQE7JcNbt60yxcRCXDyVTKYyQgjNc1YIXkoCX6c/rJ9B4oSdT+WxTRWT/bLutBXDAp9rJKNZUY+JtWLnA36MB6kJKFBfWdw9kN7o2bsr0mLHay0vqMBylP15P4zVapMT4fAAY0FZm0cNO9XYYKMRkuGmflMsOgeuoramGTuerYOQNSvBkEcQrI9RiAZDrCJNBDlOVbmg1mEx6Q9y/rwaDF+MhvEK7AqHdOw4HbuQPvxLovZeP0dDcFE1GORVgdPDzbkQwY7UPEQFLu9V8CmBSnVR24p35ZWntE6bVAA+MZpItV9fURFRc7OIbk4E4fRGwybvNC7AKGIs7pfZd4dUlX7NiN1l7bwLjfBUXuJ5djoSqmoVq48ODBhsy2g2o6qZrD7mYiLjV/PwEdIDOMKcHsCfxfr1OqHcgN6aCdwMr9ORASYOVBzOqP78wIieAxroJ9iRWqPIwEBbtU6lhYNXy3eXr3ZW1RGKRS/kcrko5ahCoxHTX+B3ig1kvEQbxjKuZKMBr8L/0vuRNCegqOGzholw2qz1ck8PGjPmXguNolt3CA+3bJz6HmYKVHcf7nZY1X2lk9L/AdmYbUGKTmjDAAAAAElFTkSuQmCC" alt="catme logo">
   <pre><h1> 
-  </h1></pre>
+  Overall Rating of Teammates: </h1></pre>
 <pre>
 
 </pre>
 <table>
-  <caption>Please select the students you wish to be on each team: <pre>
-  
-  
-  </pre></caption>
+  <caption>Please rate each team member from 1-5, (5 being the best score):</caption>
   <tr>
     <td></td>
     
-    <th scope="col"> Team 1<pre>            </pre></th>
+    <th scope="col"> Student 1 </th>
     
-    <th scope="col"> Team 2<pre>            </pre></th>
+    <th scope="col"> Student 2 </th>
     
-    <th scope="col"> Team 3<pre>            </pre></th>
-
-    <th scope="col"> Team 4<pre>            </pre></th>
-
-    <th scope="col"> Team 5<pre>            </pre></th>
-
-    <th scope="col"> Team 6<pre>            </pre></th>
-
-    <th scope="col"> Team 7<pre>            </pre></th>
-
-    <th scope="col"> Team 8<pre>            </pre></th>
-
-    <th scope="col"> Team 9<pre>            </pre></th>
-
-    <th scope="col"> Team 10<pre>            </pre></th>
-
-    <th scope="col"> Team 11<pre>            </pre></th>
-
-    <th scope="col"> Team 12<pre>            </pre></th>
-
-    <th scope="col"> Team 13<pre>            </pre></th>
-    
-    <th scope="col"> Team 14<pre>            </pre></th>
-    
-    <th scope="col"> Team 15<pre>            </pre></th>
-
-    <th scope="col"> Team 16<pre>            </pre></th>
-
-    <th scope="col"> Team 17<pre>            </pre></th>
-
-    <th scope="col"> Team 18<pre>            </pre></th>
-
+    <th scope="col"> Student 3 </th>
   </tr>
 
   <tr>
-    <th scope="row"><pre> Student 1:
+    <th scope="row"><pre>1:
+  - Does not do a fair share of the team's work. Delivers sloppy or incomplete work. 
+  - Misses deadlines. Is late, unprepared, or absent for team meetings.
+  - Does not assist teammates. Quits if the work becomes difficult.
+
+  - Interrupts, ignores, bosses, or makes fun of teammates. 
+  - Takes actions that affect teammates without their input. Does not share information.
+  - Complains, makes excuses, or does not interact with teammates. 
+  - Is defensive. Will not accept help or advice from teammates.
+
+  - Is unaware of whether the team is meeting its goals. 
+  - Does not pay attention to teammates' progress.
+  - Avoids discussing team problems, even when they are abvious.
+
+  - Satisfied even if the team does not meet assigned standards.
+  - Wants the team to avoid work, even if it hurts the team.
+  - Doubts that the team can meet its requirements.
+
+  - Missing basic qualifications needed to be a member of the team.
+  - Unable or unwilling to develop knowledge or skills to contribute to the team.
+  - Unable to perform any of the duties of other team members.
   </pre></th>
     
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
     <td><input type="checkbox" name="motivation_score" value="box"></td>
     
     <td><input type="checkbox" name="motivation_score" value="box"></td>
@@ -104,39 +72,10 @@
 
 
   <tr>
-    <th scope="row"><pre> Student 2:
+    <th scope="row"><pre>2:
+  - Demonstrates behaviors described immediately above and below.
   </pre></th>
     
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
     <td><input type="checkbox" name="motivation_score" value="box"></td>
     
     <td><input type="checkbox" name="motivation_score" value="box"></td>
@@ -146,39 +85,29 @@
   </tr>
 
   <tr>
-    <th scope="row"><pre> Student 3:
+    <th scope="row"><pre>3:
+  - Completes a fair share of the team's work with acceptable quality.
+  - Keeps commitments and completes assignments on time.
+  - Helps teammates who are having difficulty when it is easy or important.
+
+  - Listens to teammates and respects their contributions.
+  - Communicates clearly. Shares information with teammates.
+  - Participates fully in team activities.
+  - Respects and responds to feedback from teammates.
+
+  - Notices changes that influence the teams's success.
+  - Knows what everyone on the team should be doing and notices problems. 
+  - Alerts teammates or suggests solutions when the team's success is threatened.
+
+  - Encourages the team to do good work that meets all requirements.
+  - Wants the team to perform well enough to earn all available rewards.
+  - Believes that the team can fully meet its responsibilities. 
+
+  - Demonstrates sufficient knowledge, skills, and abilities to contribute to the team's work.
+  - Acquires knowledge or skills as needed to meet requirements.
+  - Able to perform some of the tasks normally done by other team members.
   </pre></th>
     
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
     <td><input type="checkbox" name="motivation_score" value="box"></td>
     
     <td><input type="checkbox" name="motivation_score" value="box"></td>
@@ -188,39 +117,10 @@
   </tr>
 
   <tr>
-    <th scope="row"><pre> Student 4:
+    <th scope="row"><pre>4:
+  - Demonstrates behaviors described immediately above and below.
   </pre></th>
     
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
     <td><input type="checkbox" name="motivation_score" value="box"></td>
     
     <td><input type="checkbox" name="motivation_score" value="box"></td>
@@ -230,7 +130,27 @@
   </tr>
 
   <tr>
-    <th scope="row"><pre> Student 5:
+    <th scope="row"><pre>5:
+  - Does more or higher-quality work than expected.
+  - Makes important contributions that improve the team's work.
+  - Helps teammates who are having difficulty completing their work.
+
+  - Asks for and shows an interest in teammates' ideas and contributions.
+  - Makes sure teammates stay informed and understand each other.
+  - Provides encouragement or enthusiasm to the team.
+  - Asks teammates for feedback and uses their suggestions to improve.
+
+  - Watches conditions affecting the team and monitors the team's progress.
+  - Makes sure that teammates are making appropriate progress.
+  - Gives teammates specific, timely, and constructive feedback.
+
+  - Motivates the team to do excellent work.
+  - Cares that the team does outstanding work, even if there is no additional reward.
+  - Believes that the team can do excellent work.
+
+  - Demonstrates the knowledge, skills, and abilities to do excellent work.
+  - Acquires new knowledge or skills to improve the team's performance.
+  - Able to perform the role of any team member if necessary.
   </pre></th>
     
     <td><input type="checkbox" name="motivation_score" value="box"></td>
@@ -238,40 +158,32 @@
     <td><input type="checkbox" name="motivation_score" value="box"></td>
     
     <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
     
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
-    
-    <td><input type="checkbox" name="motivation_score" value="box"></td>
   </tr>
 
 </table>
 
+<br>
+    <form> <pre>
+    Name: Student 1
+    Comments: </pre>
+    <input type="text" comments="Comments" size="100">
+    </form>
+<br>
+<br>
+    <form> <pre>
+    Name: Student 2
+    Comments: </pre>
+    <input type="text" comments="Comments" size="100">
+    </form>
+<br>
+<br>
+    <form> <pre>
+    Name: Student 3
+    Comments: </pre>
+    <input type="text" comments="Comments" size="100">
+    </form>
+<br>
 <!--<button onclick="event1"> submit </button>-->
 
 </body>
