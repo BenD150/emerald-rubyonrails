@@ -2,7 +2,7 @@
 class ProjectController < ApplicationController
   # The GET request must render all of the teams
   def get_teams
-    @teams = Team.all
+    render json: Team.all
   end
 
   # The POST request expects a project name and a list of teams to assign it to.

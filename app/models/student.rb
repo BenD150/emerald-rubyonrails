@@ -29,7 +29,8 @@ class Student < ApplicationRecord
   def comments_for()
     comments = []
       self.comments.each do |c|
-        comments.push(c) if c.written_for == self
+        comments.
+          push(c) if c.written_for == self
       end
       comments
   end
