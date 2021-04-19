@@ -1,15 +1,20 @@
 # This controller renders all of the statistics for each project using only a GET request.
 class StatController < ApplicationController
-  # The GET request must render the stats for each project (for each loop?
+  # The GET request must render the stats for each project
   def get_stats
-    # For each project
-    # Project.surveys
-    # look at which surveys
-    # Two GET requests: FIrst returns all of the students. The second GET returns the problematic students (average_score_from_teammates: < 3)
-    @projects = Project.all
-    @projects.each do |project|
-      @name = project.name
-      @due_date = project.due
+    students = Student.all
+    result = []
+    students.each do |student|
+      student_result = {name: student.first + " " + student.last, id: student.id, survey_results: []}
+      projects = student.projects
+      projects.each do |project|
+        survey_result = {project_name: project.name, comments: []}
+        surveys = project.surveys
+        surveys.each do |survey|
+          
+        end
+        student_result[:survey_results].push(survey_result)
+      end
     end
   end
 end
