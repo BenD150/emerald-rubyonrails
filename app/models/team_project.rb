@@ -4,32 +4,54 @@ class TeamProject < ApplicationRecord
 
   has_many :surveys
 
-  def comments_by(student)
+  def comments_for_team(student)
     comments = []
-      self.surveys.comments.each do |c|
-        comments.push(c) if c.student != student
+      self.surveys.each do |survey|
+        survey.comments.each do |c|
+          comments.push(c) if c.student != student && survey.student == student
+        end
       end
-      comments
+    comments
   end
-  def scores_by(student)
+  def scores_for_team(student)
     scores = []
-      self.surveys.scores.each do |s|
-        scores.push(s) if s.student != student
+      self.surveys.each do |survey|
+        survey.scores.each do |s|
+          scores.push(s) if s.student != student && survey.student == student
+        end
       end
-      scores
+    scores
   end
-  def comments_for(student)
+  def comments_from_team(student)
     comments = []
-      self.surveys.comments.each do |c|
-        comments.push(c) if c.student == student
+      self.surveys.each do |survey|
+        survey.comments.each do |c|
+          comments.push(c) if c.student == student && survey.student != student
+        end
       end
-      comments
+    comments
   end
-  def scores_for(student)
+  def scores_from_team(student)
     scores = []
-      self.surveys.scores.each do |s|
-        scores.push(s) if s.student == student
+      self.surveys.each do |survey|
+        survey.scores.each do |s|
+          scores.push(s) if s.student == student && survey.student != student
+        end
       end
-      scores
+    scores
+  end
+  def comment_for_self(student)
+      self.surveys.each do |survey|
+        survey.comments.each do |c|
+          return c if c.student == student && survey.student == student
+        end
+      end
+  end
+  def score_for_self(student)
+      self.surveys.each do |survey|
+        survey.scores.each do |s|
+          return s if s.student == student && survey.student == student
+        end
+      end
   end
 end

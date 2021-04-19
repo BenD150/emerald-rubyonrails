@@ -24,7 +24,11 @@
 
     Comment.create({text: 'Great Job!',survey: survey,written_for: teammate})
     Comment.create({text: 'Way to Go!',survey: teammate_survey,written_for: student})
+    Comment.create({text: 'Of course I\'m awesome!',survey: survey,written_for: student})
+    Comment.create({text: 'I\'m great, obviously.',survey: teammate_survey,written_for: teammate})
 
-    Score.create({value: 5,survey: survey,student: teammate})
-    Score.create({value: 5,survey: teammate_survey,student: student})
+    Score.create({value: 4,survey: survey,student: teammate})
+    Score.create({value: 4,survey: teammate_survey,student: student})
+    Score.create({value: 5,survey: survey,student: student})
+    Score.create({value: 5,survey: teammate_survey,student: teammate})
 
