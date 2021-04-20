@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_042937) do
+ActiveRecord::Schema.define(version: 2021_04_20_025407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,28 @@ ActiveRecord::Schema.define(version: 2021_04_15_042937) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_id"], name: "index_comments_on_student_id"
     t.index ["survey_id"], name: "index_comments_on_survey_id"
+  end
+
+  create_table "course_instructors", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "instructor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_instructors_on_course_id"
+    t.index ["instructor_id"], name: "index_course_instructors_on_instructor_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "instructors", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_instructors_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -57,6 +79,8 @@ ActiveRecord::Schema.define(version: 2021_04_15_042937) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "surveys", force: :cascade do |t|
@@ -80,6 +104,8 @@ ActiveRecord::Schema.define(version: 2021_04_15_042937) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_teams_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -90,20 +116,23 @@ ActiveRecord::Schema.define(version: 2021_04_15_042937) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "student_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "comments", "students"
   add_foreign_key "comments", "surveys"
+  add_foreign_key "course_instructors", "courses"
+  add_foreign_key "course_instructors", "instructors"
+  add_foreign_key "instructors", "users"
   add_foreign_key "scores", "students"
   add_foreign_key "scores", "surveys"
   add_foreign_key "student_teams", "students"
   add_foreign_key "student_teams", "teams"
+  add_foreign_key "students", "users"
   add_foreign_key "surveys", "students"
   add_foreign_key "surveys", "team_projects"
   add_foreign_key "team_projects", "projects"
   add_foreign_key "team_projects", "teams"
-  add_foreign_key "users", "students"
+  add_foreign_key "teams", "courses"
 end

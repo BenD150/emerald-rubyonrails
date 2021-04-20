@@ -5,12 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-    student = Student.create({first: 'Zach',last: 'Salem',email: 'salem.105@osu.edu'})
+    user = User.create({email: 'salem.105@osu.edu',password: 'Password1!'})
+    teacher = User.create({email: 'giles.72@osu.edu',password: 'Password1!'})
+    
+    instructor = Instructor.create({user: teacher})
+    course = Course.create({name: "Giles Sp21 3901 Sc1"})
+    CourseInstructor.create({course: course, instructor: instructor})
+
+    student = Student.create({first: 'Zach',last: 'Salem',email: 'salem.105@osu.edu',user: user})
     teammate = Student.create({first: 'Ben',last: 'Dollenmayer',email: 'dollenmayer.5@osu.edu'})
 
-    User.create({email: 'salem.105@osu.edu',password: 'Password1!', student: student})
-
-    team = Team.create({name: 'Team Emerald'})
+    team = Team.create({name: 'Team Emerald',course: course})
 
     StudentTeam.create({student: student,team: team})
     StudentTeam.create({student: teammate,team: team})

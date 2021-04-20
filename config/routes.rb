@@ -12,5 +12,3 @@ Rails.application.routes.draw do
 
 
 end
-#2: name of controller - name of method
-# 8 things will be written here. 5 things will be get, 3 things will be post
