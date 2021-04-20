@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang= "en">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="popper.min.js"></script>
+  <meta charset= "UTF-8">
+  <title> Homepage </title>
+  <style> 
+    p {
+     margin: 25px;
+    }
+    table {
+     margin: 25px;
+    }
+    img {
+      margin: 25px;
+    }
+  </style>
+</head>
+<body>
+  <%= image_tag "logo.jpeg" %>
+
+  <% if user_signed_in? %>
+    <p>Please select a project to complete an evaluation for below:</p>
+    
+    <table border="1">
+
+      <tr>
+        <th scope="col">Class Name</th>      
+        <th scope="col"> Team Name </th>      
+        <th scope="col"> Project Name </th>
+        <th scope="col"> Actions </th>
+        <th scope="col"> Due </th>
+      </tr>
+
+      <% @rows.each do |row|%>
+        <tr>
+          <td><%= row[:class_name] %></td>
+          <td><%= row[:team_name] %></td>
+          <td><%= row[:project_name] %></td>
+          <td><a href="<%= row[:action_link] %>"><%= row[:action_text] %></a></td>
+          <td><%= row[:due] %></td>
+        </tr>
+      <% end %>
+
+    </table>
+  <% else %>
+    <p>If your instructor has added you to a class, please sign in or register to complete evalutations.</p>
+    <%= @current_user %>
+  <% end %>
+
+</body>
+</html>

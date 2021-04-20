@@ -2,7 +2,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: 'welcome#index'
+  root to: 'home#index'
 
   get '/student/index', to: 'student#index'
   post '/student/index', to: 'student#create'
