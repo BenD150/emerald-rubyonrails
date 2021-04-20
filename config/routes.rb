@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   get '/team/index', to: 'team#index'
   post '/team/index', to: 'team#create'
 
+  get '/survey/complete', to: 'survey#complete'
+  post '/survey/complete', to: 'survey#create'
+  get '/survey/view', to: 'survey#view'
 
 end

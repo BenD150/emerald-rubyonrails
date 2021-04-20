@@ -38,7 +38,13 @@
           <td><%= row[:class_name] %></td>
           <td><%= row[:team_name] %></td>
           <td><%= row[:project_name] %></td>
-          <td><a href="<%= row[:action_link] %>"><%= row[:action_text] %></a></td>
+          <td>
+            <% if row[:action_link] %>
+              <a href="<%= row[:action_link] %>"><%= row[:action_text] %></a>
+            <% else %>
+              <%= row[:action_text] %>
+            <% end %>
+          </td>
           <td><%= row[:due] %></td>
         </tr>
       <% end %>

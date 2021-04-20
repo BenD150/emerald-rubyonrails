@@ -1,22 +1,45 @@
 # This controller deals with the evaluation surveys
 class SurveyController < ApplicationController
+  include SurveyHelper
+  before_action :authenticate_user!
+
   # The GET request must render the names of the teammates of the signed in user
-  def index
-    if user_signed_in?
-      user = current_user
-      student = user.student_id
+  def complete
+    unless current_user.student
+      render :nothing => true, :status => :unauthorized
+    end
+
+    current_user.student
+    team_project = TeamProject.where(id: params[:id]).first
+    students = team_project.team.students
+    @students = students.collect{|student| {id: student.id, name: student.first + ' ' + student.last}}
+  end
+
+  # The POST request creates the survey filled out by the student
+  def create
+    unless current_user.student
+      render :nothing => true, :status => :unauthorized
+    end
+
+    team_project = TeamProject.where(id: params[:id]).first
+
+    Survey.create({team_project: team_project,written_by: current_user.student})
+    params[:completed_survey].each do |item|
+      written_for = Student.where(id: item[:student_id])
+      Comment.create({text: item[:text],survey: survey,written_for: written_for})
+      Score.create({value: item[:score],survey: survey,written_for: written_for})
     end
   end
 
+  # The GET request must render the results of this particular survey
+  def view
+    unless current_user.student
+      render :nothing => true, :status => :unauthorized
+    end
 
-
-  # The POST request lists the survey results which is a comment and a number
-  # See survye controller
-  # Comment and score object linked to the survey and the student
-  # A team has multiple projects. Each project has multiple sryvets. The survey has the ID of the survey and the student that is writing it. Each survey has a list of comments and scores. The writer of the survey ID
-  # is on the su,
-  def results
-    survey =
+    team_project = TeamProject.where(id: params[:id]).first
+    @survey = survey_result(team_project, current_user.student)
+    @survey[:team_name] = team_project.team.name
   end
 
 end

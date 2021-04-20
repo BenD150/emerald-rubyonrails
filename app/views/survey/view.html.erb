@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang= "en">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="popper.min.js"></script>
+  <meta charset= "UTF-8">
+  <title> Peer Evaluation Feedback Results for Self </title>
+  <style> 
+    form {
+     margin: 25px;
+    }
+    table {
+     margin: 25px;
+    }
+    img {
+      margin: 25px;
+    }
+  </style>
+</head>
+<body>
+  <%= image_tag "logo.jpeg" %>
+  <br><pre>    
+
+  <caption> Peer Evaluation Results: </caption></pre>
+
+    <pre>
+    Team Name: <%= @survey[:team_name] %>
+    Project Name: <%= @survey[:project_name] %>
+    Rating given to self: <%= @survey[:score_for_self] %>
+    Rating given by team members (average): <%= @survey[:average_score_from_teammates] %>
+    Comments From Team Members:
+    <ul>
+        <% @survey[:comments].each do |comment| %>
+            <li><%= comment %></li>
+        <% end %>
+    </ul>
+    </pre>
+<br>
+
+</body>
+</html>
