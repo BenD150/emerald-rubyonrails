@@ -131,8 +131,6 @@
         <option value="administrate:assets:stylesheets" />
         <option value="administrate:dashboard" />
         <option value="administrate:field" />
-        <option value="administrate:install" />
-        <option value="administrate:routes" />
         <option value="administrate:view" />
         <option value="administrate:views" />
         <option value="administrate:views:edit" />
@@ -188,8 +186,6 @@
         <option value="administrate:assets:stylesheets" />
         <option value="administrate:dashboard" />
         <option value="administrate:field" />
-        <option value="administrate:install" />
-        <option value="administrate:routes" />
         <option value="administrate:view" />
         <option value="administrate:views" />
         <option value="administrate:views:edit" />
