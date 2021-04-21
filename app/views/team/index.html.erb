@@ -6,5 +6,7 @@
 </head>
 <body>
 <div>
-
+  <% @teams.each do |team| %>
+    The team's name is <%= team.name %> and the course is  <%= team.course %>.
+  <% end %>
 </div>

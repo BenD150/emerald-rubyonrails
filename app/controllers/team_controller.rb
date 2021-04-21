@@ -4,7 +4,7 @@ class TeamController < ApplicationController
 
   # The GET request must render every one of the student's names
   def index
-    render json: Student.all
+    @students = Student.all
   end
 
   # The POST request expects JSON with a value that can be made into a new database record.
