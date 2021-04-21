@@ -2,18 +2,21 @@
 class TeamController < ApplicationController
   protect_from_forgery except: :create
 
-  # The GET request must render every one of the student's names
+  # The GET request must render every one of the teams
   def index
-    @students = Student.all
+    @teams = Team.all
+    @student_teams = StudentTeam.all
   end
 
   # The POST request expects JSON with a value that can be made into a new database record.
   def create
-    team = Team.create(name: params[:name])
+    team_name = params[:team_name].to_s
+    team = Team.create(name: team_name, course: Course.first)
     student_ids = params[:student_ids]
     student_ids.each do |student_id|
       StudentTeam.create(student_id: student_id, team: team)
     end
+    render json: { success: true }
   end
 end
 

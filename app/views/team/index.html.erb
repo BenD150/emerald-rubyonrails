@@ -7,6 +7,9 @@
 <body>
 <div>
   <% @teams.each do |team| %>
-    The team's name is <%= team.name %> and the course is  <%= team.course %>.
+    The team's name is <%= team.name %>.
+  <% end %>
+  <% @student_teams.each do |student_team| %>
+      The team that <%= student_team.student.first %> is on is <%= student_team.team.name %>.
   <% end %>
 </div>

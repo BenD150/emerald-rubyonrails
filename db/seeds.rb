@@ -13,7 +13,7 @@
     CourseInstructor.create({course: course, instructor: instructor})
 
     student = Student.create({first: 'Zach',last: 'Salem',email: 'salem.105@osu.edu',user: user})
-    teammate = Student.create({first: 'Ben',last: 'Dollenmayer',email: 'dollenmayer.5@osu.edu'})
+    teammate = Student.create({first: 'Ben',last: 'Dollenmayer',email: 'dollenmayer.8@osu.edu'})
 
     CourseStudent.create({course: course,student:student})
     CourseStudent.create({course: course,student:teammate})

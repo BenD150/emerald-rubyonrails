@@ -1,7 +1,6 @@
 # This controller allows a teacher to add a class roster to the database.
 class StudentController < ApplicationController
   protect_from_forgery except: :create
-
   # The GET request must render every one of the student's names
   def index
     @students = Student.all
@@ -15,9 +14,8 @@ class StudentController < ApplicationController
     arr.each do |element|
       new_student = element.split(',')
       name = new_student[0].split
-      # old way: Student.create({ first: new_student[0], last: new_student[1].gsub(',', ''), email: new_student[2] })
-      render json: Student.create(first: name[0], last: name[1], email: new_student[1])
-      redirect_to '/student/index'
+      Student.create(first: name[0], last: name[1], email: new_student[1])
     end
+    render json: { success: true }
   end
 end

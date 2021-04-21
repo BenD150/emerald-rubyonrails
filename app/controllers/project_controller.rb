@@ -2,19 +2,20 @@
 class ProjectController < ApplicationController
   # The GET request must render all of the teams
   # User.student.projects
-  def get_teams
-    render json: Team.all
+  def index
+    @projects = Project.all
+    @team_projects = TeamProject.all
   end
 
   # The POST request expects JSON with a value that can be made into a new database record. Make a single project and assign multiple teams to it
-  # iterate over u.student.projects
-  # If a student is assigned a project, they are assigned a teamproject.
-  # To get a studen't real project, it is u.student.team_projects.first.team to get the
+  # Don't we also need due_date as a param?
   def create
-    project = Project.create(name: params[:project_name])
+    due_date = '2021-05-20T11:59:59'
+    project = Project.create(name: params[:project_name], due: due_date)
     team_ids = params[:team_ids]
     team_ids.each do |team_id|
       TeamProject.create(team_id: team_id, project: project)
     end
+    render json: { success: true }
   end
 end
