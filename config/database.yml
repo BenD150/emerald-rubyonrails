@@ -56,9 +56,9 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: rails_app
-  host: localhost
+  database: dr0vaef6ttmns
+  host: ec2-3-212-75-25.compute-1.amazonaws.com
   pool: 5
-  username: postgres
-  password: MyPassword
+  username: mkjevmjavwnboe
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   role: MyRole
