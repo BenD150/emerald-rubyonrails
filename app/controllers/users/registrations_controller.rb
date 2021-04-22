@@ -15,8 +15,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if params[:instructor_check] == '1'
         Instructor.create(user: current_user)
       end
-
-
+      
+      student = Student.where(email: current_user.email).first
+      if student
+        student.user = current_user
+        student.save
+      end
     end
   end
 
