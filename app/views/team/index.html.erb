@@ -13,99 +13,44 @@
     <th scope="col"></th>
 
     <td>
-    <form action = "begin-create-done.html" method="get">
-    Team Name: <!--<input type="text" name="teamname" onkeyup="formChanged()" onchange="formChanged()"/>
-    <button onclick="formChanged(click)" data-inline = "true" >Register Team Name</button>-->
-    </form>
-
-    <form action="someAction" method="post">
-      <input type="text" name="text" id="text"/>
-
-      <!--<input type="text" name="value" id="value">-->
-    </form>
+      <p>Team Name:</p>
+      <input type="text" onkeyup="set_team_name(this)"/>
     </td>
 
   </tr>
 
-  <tr>
-    <th scope="row"><pre> Student 1:
-  </pre></th>
-    
-    <td><div class="placeholder" onclick="setstudent('0')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-  </tr>
-
-
-  <tr>
-    <th scope="row"><pre> Student 2:
-  </pre></th>
-    
-    <td><div class="placeholder" onclick="setstudent('1')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-  </tr>
-
-  <tr>
-    <th scope="row"><pre> Student 3:
-  </pre></th>
-    
-    <td><div class="placeholder" onclick="setstudent('2')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-  </tr>
-
-  <tr>
-    <th scope="row"><pre> Student 4:
-  </pre></th>
-    
-    <td><div class="placeholder" onclick="setstudent('3')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-  </tr>
-
-  <tr>
-    <th scope="row"><pre> Student 5:
-  </pre></th>
-    
-    <td><div class="placeholder" onclick="setstudent('4')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-
-  </tr>
+  <% @students.each_with_index do |student, i| %>
+    <tr>
+      <th scope="row"><pre> <%= student[:name] %>
+    </pre></th>
+      <td><div class="placeholder"><input type="checkbox" name="motivation_score" value="box" onclick="set_student(<%= student[:student_id] %>, this)"></div></td>
+    </tr>
+  <% end %>
 
 </table>
-<button onclick="testme()"> check the update </button>
+<button onclick="post_team()"> Submit </button>
 
 <script>
-var current_tempteamname = "default";
-var data = 
-{ completed_survey:  
-  [
-    {   team_name: "default team name",
-        student_ids: []
-    },    
-  ]
+var data = {
+    team_name: null,
+    student_ids: []
 };
-var myVar=setInterval(function(){getValue()},5000);
-function getValue() {
-  //document.getElementById("value").value=document.getElementById("text").value;
-  data.completed_survey[0].team_name = document.getElementById("text").value;
-}
-function testme(click) {
-  //alert("team name for elt0: " + data.completed_survey[0].team_name + ", " + "student ids for elt0: " + data.completed_survey[0].student_id.join());
-  alert("team name for elt0 is " + data.completed_survey[0].team_name + ", and the student ids listed under that team are: " + data.completed_survey[0].student_ids[0] + data.completed_survey[0].student_ids[1] + data.completed_survey[0].student_ids[2] + data.completed_survey[0].student_ids[3] + data.completed_survey[0].student_ids[4]);
+
+function set_team_name(e){
+  data.team_name = e.value;
 }
 
-function setstudent(student){
-  student++;
-  //first, find the team_name within the text box. if does not exist, add another element to data.completed_survey and set a key, team_name, to the one in the
-  //text box and then add the student id to the student_id key array. 
-  data.completed_survey[0].student_ids.push(String(student)); 
+
+function set_student(student_id, e){
+  if (e.checked) {
+    if (!data.student_ids.find(i=>i==student_id)) data.student_ids.push(student_id);
+  } else {
+    const index = data.student_ids.indexOf(student_id);
+    data.student_ids.splice(index, 1);
+  }
 }
 
-/*document.addEventListener("click", formteam);
-function formteam(){
-  var input = document.getElementById("userInputTeamName").value;
-  //subButton.addEventListener('click', )
-  current_tempteamname = input;
-}*/
-
-function formChanged(click) {
-  current_tempteamname = document.getElementsByName("teamname").value;
+async function post_team() {
+  res = await (await fetch('/teams', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
 }
 </script>

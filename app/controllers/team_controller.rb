@@ -9,7 +9,7 @@ class TeamController < ApplicationController
       render :nothing => true, :status => :unauthorized
     end
 
-    @students = $selected_course.students
+    @students = $selected_course.students.collect{|student| {name: student.first + ' ' + student.last, student_id: student.id }}
   end
 
   # The POST request creates a team and then adds the selected students to it

@@ -133,7 +133,7 @@
             <form> <pre>
             Name: <%= student[:name] %>
             Comments: </pre>
-            <input type="text" comments="Comments" size="100" onkeypress="set_comment(this, <%= i %>)">
+            <input type="text" comments="Comments" size="100" onkeyup="set_comment(this, <%= i %>)">
             </form>
         <br>
     <% end %>

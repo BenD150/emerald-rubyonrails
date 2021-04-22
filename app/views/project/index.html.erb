@@ -1,45 +1,73 @@
-<p><%= @teams.to_json %></p>
-
 <pre>
 
 </pre>
-
-<caption><pre>  Please add the team name and project name you would like to create to assign the specified team the project you create.</pre></caption>
 <table>
+  <caption>Please, before selecting any teams, type in the name of the project you wish to create: <pre>
   
+  
+  </pre></caption>
   <tr>
-    <th scope="col"> </th>
+    <td></td>
+    <td></td>
+    
+    <th scope="col"></th>
+
+    <td>
+      <p>Project Name:</p>
+      <input type="text" onkeyup="set_project_name(this)"/>
+      <p>Due Date (YYYY-MM-DD):</p>
+      <input type="text" onkeyup="set_project_date(this)"/>
+      <p>Due Time (HH:MM:SS):</p>
+      <input type="text" onkeyup="set_project_time(this)"/>
+    </td>
+
   </tr>
 
-  <tr>
-    <th scope="row">
-
-  <form action = "begin-create-done.html" method="get">
-  Project Name: <input type="text" name="projectname" onkeyup="formChanged1()" onchange="formChanged1()"/>
-  <button onclick="formChanged1(click)" data-inline = "true" >Project Name</button>
-  </form>
-
-  <form action = "begin-create-done.html" method="get">
-  Team Name: <input type="text" name="teamname" onkeyup="formChanged2()" onchange="formChanged2()"/>
-  <button onclick="formChanged2(click)" data-inline = "true" >Team Name</button>
-  </form>
-
-
-    </th>
-  </tr>
+  <% @teams.each_with_index do |team, i| %>
+    <tr>
+      <th scope="row"><pre> <%= team[:team_name] %>
+    </pre></th>
+      <td><div class="placeholder"><input type="checkbox" name="motivation_score" value="box" onclick="set_team(<%= team[:team_id] %>, this)"></div></td>
+    </tr>
+  <% end %>
 
 </table>
+<button onclick="post_project()"> Submit </button>
 
 <script>
 var data = {
-  project_name: "",
-  team_ids: []
+    project_name: null,
+    due_date: null,
+    team_ids: []
+};
+
+var date = null;
+var time = null;
+
+function set_project_name(e){
+  data.project_name = e.value;
 }
 
-function formChanged1(click) {
-  data.team_ids.push(document.getElementsByName("projectname").value);
+function set_project_date(e){
+  date = e.value;
 }
-function formChanged2(click) {
-  data.project_name = document.getElementsByName("teamname").value;
-} 
+
+function set_project_time(e){
+  time = e.value;
+}
+
+
+function set_team(team_id, e){
+  if (e.checked) {
+    if (!data.team_ids.find(i=>i==team_id)) data.team_ids.push(team_id);
+  } else {
+    const index = data.team_ids.indexOf(team_id);
+    data.team_ids.splice(index, 1);
+  }
+}
+
+async function post_project() {
+  data.due_date = date + 'T' + time;
+  res = await (await fetch('/projects', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
+}
 </script>
