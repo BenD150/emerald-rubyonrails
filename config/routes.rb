@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: 'home#index'
+  get '/course', to: 'home#course'
+  get '/courses', to: 'home#courses'
+  post '/select', to: 'home#select'
 
   get '/student/index', to: 'student#index'
   post '/student/index', to: 'student#create'

@@ -1,21 +1,32 @@
 # This controller renders all teams with a GET request and allows teams to be assigned to a project with a POST request.
 class ProjectController < ApplicationController
-  # The GET request must render all of the teams
-  # User.student.projects
+  protect_from_forgery except: :create
+  before_action :authenticate_user!
+
+  # The GET request renders all the teams in the current course
   def index
-    @projects = Project.all
-    @team_projects = TeamProject.all
+    unless current_user.instructor
+      render :nothing => true, :status => :unauthorized
+    end
+
+    @teams = Team.where(course: $selected_course)
   end
 
-  # The POST request expects JSON with a value that can be made into a new database record. Make a single project and assign multiple teams to it
-  # Don't we also need due_date as a param?
+  # The POST request creates a project and it to the selected teams
   def create
-    due_date = '2021-05-20T11:59:59'
-    project = Project.create(name: params[:project_name], due: due_date)
+    unless current_user.instructor
+      render :nothing => true, :status => :unauthorized
+    end
+    
+    # create project
+    project = Project.create(name: params[:project_name], due: params[:due_date], course: $selected_course)
+
+    # add teams to project
     team_ids = params[:team_ids]
     team_ids.each do |team_id|
       TeamProject.create(team_id: team_id, project: project)
     end
+
     render json: { success: true }
   end
 end

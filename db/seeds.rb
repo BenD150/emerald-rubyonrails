@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
     user = User.create({email: 'salem.105@osu.edu',password: 'Password1!'})
-    teacher = User.create({email: 'giles.72@osu.edu',password: 'Password1!'})
+    teacher = User.create({email: 'giles.25@osu.edu',password: 'Password1!'})
     
     instructor = Instructor.create({user: teacher})
-    course = Course.create({name: "Giles Sp21 3901 Sc1"})
+    course = Course.create({name: "Giles CSE 3901 Sp21 Sc1"})
     CourseInstructor.create({course: course, instructor: instructor})
 
     student = Student.create({first: 'Zach',last: 'Salem',email: 'salem.105@osu.edu',user: user})
@@ -23,7 +23,7 @@
     StudentTeam.create({student: student,team: team})
     StudentTeam.create({student: teammate,team: team})
 
-    project = Project.create({name: 'Game of Set',due: '2021-05-20T11:59:59'})
+    project = Project.create({name: 'Game of Set',due: '2021-05-20T11:59:59',course: course})
 
     team_project = TeamProject.create({team: team,project: project})
 

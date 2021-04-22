@@ -2,7 +2,6 @@
 <html lang= "en">
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="popper.min.js"></script>
   <meta charset= "UTF-8">
   <title> Homepage </title>
   <style> 
@@ -20,20 +19,20 @@
 <body>
   <%= image_tag "logo.jpeg" %>
 
-  <% if user_signed_in? %>
+  <% if user_signed_in? && current_user.student %>
     <p>Please select a project to complete an evaluation for below:</p>
     
     <table border="1">
 
       <tr>
-        <th scope="col">Class Name</th>      
+        <th scope="col"> Class Name </th>      
         <th scope="col"> Team Name </th>      
         <th scope="col"> Project Name </th>
         <th scope="col"> Actions </th>
         <th scope="col"> Due </th>
       </tr>
 
-      <% @rows.each do |row|%>
+      <% @student_projects.each do |row|%>
         <tr>
           <td><%= row[:class_name] %></td>
           <td><%= row[:team_name] %></td>
@@ -50,8 +49,38 @@
       <% end %>
 
     </table>
+  <% elsif user_signed_in? && current_user.instructor %>
+    <% if $selected_course %>
+      <p>Here are all the projects assigned to teams in the course <% $selected_course.name %>:</p>
+      
+      <table border="1">
+
+        <tr> 
+          <th scope="col"> Project Name </th>
+          <th scope="col"> Teams Assigned </th>      
+          <th scope="col"> Due </th>
+        </tr>
+
+        <% @course_projects.each do |row|%>
+          <tr>
+            <td><%= row[:project_name] %></td>
+            <td><%=row[:team_names]%></td>
+            <td><%= row[:due] %></td>
+          </tr>
+        <% end %>
+
+      </table>
+    <% else %>
+      <p>Select a course to manage:</p>
+      
+      <ul>
+        <% @courses.each do |course|%>
+          <li><a href=<%= '/course?id='+course[:id].to_s %>><%= course[:name] %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% else %>
-    <p>If your instructor has added you to a class, please sign in or register to complete evalutations.</p>
+    <p>Please sign in or register to complete or create evalutations.</p>
     <%= @current_user %>
   <% end %>
 
