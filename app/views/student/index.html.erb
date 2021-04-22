@@ -1,11 +1,10 @@
-<pre>
-
-</pre>
-
-<caption><pre>  Please insert plain text either by typing it out or copying and pasting it into the text box below with the following format:
-    julia kolnicki,kolnicki.3@osu.edu
-    zach salem,salem.1@osu.edu
-    ben dollenmeyer,dollenmeyer.1@osu.edu</pre></caption>
+<caption><pre>Please insert plain text either by typing it out or copying and pasting it into the text box below with the following format.
+Note that you may designate a user as an additional instructor for this course, rather than a student, by adding 'Instructor' to the end of the line.
+    Julia Kolnicki,kolnicki.3@osu.edu
+    Zach Salem,salem.105@osu.edu
+    Ben Dollenmeyer,dollenmeyer.1@osu.edu
+    Michael Foley,foley.1@osu.edu,Instructor
+</pre></caption>
 <table>
   
   <tr>
@@ -14,21 +13,33 @@
 
   <tr>
     <th scope="row">
-    <!--<form> 
-    <input type="text" comments="Comments" size="100">
-    </form>-->
 
-    <textarea id="w3review" name="w3review" rows="10" cols="100">
-Example Student1,student.1@osu.edu
-Example Student2,student.2@osu.edu
-Example Student3,student.3@osu.edu
+    <textarea spellcheck="false" rows="10" cols="100" onkeypress="set_text(this)">
+Julia Kolnicki,kolnicki.3@osu.edu
+Zach Salem,salem.1@osu.edu
+Ben Dollenmeyer,dollenmeyer.1@osu.edu
+Michael Foley,foley.1@osu.edu,Instructor
 </textarea>
 
   <br>
-  <button onclick="event1" data-inline = "true" >Submit</button>
+  <button onclick="post_students()" data-inline = "true" >Submit</button>
 
 
     </th>
   </tr>
 
 </table>
+
+<script>
+var data = {
+  text: null
+};
+
+function set_text(e, i){
+    data.text = e.value;
+}
+
+async function post_students() {
+    res = await (await fetch('/students', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
+}
+</script>
