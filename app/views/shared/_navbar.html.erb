@@ -3,7 +3,7 @@
     <a class="nav-item">
       <%= link_to image_tag("favicon.png", style: 'height:50px;width:auto;margin:-10px'), '/',  class: 'nav-link'%>
     </a>
-    <% if $selected_course %>
+    <% if user_signed_in? && current_user.instructor && $selected_course %>
       <p style="margin-top:-5px;margin-bottom:-5px;"><%= 'Course: ' + $selected_course.name %></p>
     <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,6 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto">
-        <%# TODO render if instructor %>
         <% if user_signed_in? && current_user.instructor %>
           <% if $selected_course %>
             <li class="nav-item">

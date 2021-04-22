@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang= "en">
 <head>
-  <meta charset="UTF-8">
-  <title>Students</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset= "UTF-8">
+  <title> Homepage </title>
+  <style> 
+    p {
+     margin: 25px;
+    }
+    table {
+     margin: 25px;
+    }
+    img {
+      margin: 25px;
+    }
+  </style>
 </head>
 <body>
-<div>
-  <% @teams.each do |team| %>
-    The team's name is <%= team.name %>.
-  <% end %>
-  <% @student_teams.each do |student_team| %>
-      The team that <%= student_team.student.first %> is on is <%= student_team.team.name %>.
-  <% end %>
-</div>
+  <%= image_tag "logo.jpeg" %>
+
+  <p><%= @students.to_json %></p>
+
+</body>
+</html>

@@ -30,7 +30,14 @@ class StudentController < ApplicationController
 
       # if student doesn't exist, create
       unless student
-        student = tudent.create(first: first, last: last, email: email)
+        user = User.where(email: email)
+        if user
+          # if corresponding user exists, reference this new student
+          student = Student.create(first: first, last: last, email: email, user: user)
+        else
+          # otherwise, assume we will add the user reference later when the user is created
+          student = Student.create(first: first, last: last, email: email)
+        end
       end
 
       # match student with current course
