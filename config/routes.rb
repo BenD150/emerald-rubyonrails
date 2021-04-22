@@ -3,15 +3,19 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   root to: 'home#index'
+  get '/course', to: 'home#course'
+  get '/courses', to: 'home#courses'
 
-  get '/student/index', to: 'student#index'
-  post '/student/index', to: 'student#create'
+  get '/students', to: 'student#index'
+  post '/students', to: 'student#create'
 
-  get '/team/index', to: 'team#index'
-  post '/team/index', to: 'team#create'
+  get '/teams', to: 'team#index'
+  post '/teams', to: 'team#create'
 
-  get '/project/index', to: 'project#index'
-  post '/project/index', to: 'project#create'
+  get '/projects', to: 'project#index'
+  post '/projects', to: 'project#create'
+
+  get '/results', to: 'stat#index'
 
   get '/survey/complete', to: 'survey#complete'
   post '/survey/complete', to: 'survey#create'

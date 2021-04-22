@@ -3,7 +3,7 @@ class SurveyController < ApplicationController
   include SurveyHelper
   before_action :authenticate_user!
 
-  # The GET request must render the names of the teammates of the signed in user
+  # The GET request renders the names of the teammates of the authenticated user
   def complete
     unless current_user.student
       render :nothing => true, :status => :unauthorized
@@ -23,15 +23,15 @@ class SurveyController < ApplicationController
 
     team_project = TeamProject.where(id: params[:id]).first
 
-    Survey.create({team_project: team_project,written_by: current_user.student})
+    Survey.create(team_project: team_project,written_by: current_user.student)
     params[:completed_survey].each do |item|
       written_for = Student.where(id: item[:student_id])
-      Comment.create({text: item[:text],survey: survey,written_for: written_for})
-      Score.create({value: item[:score],survey: survey,written_for: written_for})
+      Comment.create(text: item[:text],survey: survey,written_for: written_for)
+      Score.create(value: item[:score],survey: survey,written_for: written_for)
     end
   end
 
-  # The GET request must render the results of this particular survey
+  # The GET request renders the results of this particular survey
   def view
     unless current_user.student
       render :nothing => true, :status => :unauthorized
@@ -41,5 +41,4 @@ class SurveyController < ApplicationController
     @survey = survey_result(team_project, current_user.student)
     @survey[:team_name] = team_project.team.name
   end
-
 end

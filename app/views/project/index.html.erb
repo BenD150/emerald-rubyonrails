@@ -1,15 +1,1 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Students</title>
-</head>
-<body>
-<div>
-  <% @projects.each do |project| %>
-    The project name is <%= project.name %>.
-  <% end %>
-  <% @team_projects.each do |team_project| %>
-    The team name is <%= team_project.team.name %> and they are assigned to the project <%= team_project.project.name %>.
-  <% end %>
-</div>
+<p><%= @teams.to_json %></p>

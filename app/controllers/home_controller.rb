@@ -1,10 +1,16 @@
 # This controller generates the homepage using a GET request
 class HomeController < ApplicationController
+  protect_from_forgery except: :select
   require 'date'
-  # The GET request must render the projects, team that the project was assigned to, and the survey for that project.
+
+  # The GET request must render the
+  #   - projects, if student
+  #   - courses, if instructor and no course selected
+  #   - projects, if instructor and course selected
+  #   - a sign in message, if unathenticated
   def index
-    if user_signed_in?
-      @rows = current_user.student.team_projects.collect{ |team_project|
+    if user_signed_in? && current_user.student
+      @student_projects = current_user.student.team_projects.collect{ |team_project|
         {
           class_name: team_project.team.course.name,
           team_name: team_project.team.name,
@@ -14,6 +20,45 @@ class HomeController < ApplicationController
           due: team_project.project.due.in_time_zone('Eastern Time (US & Canada)').strftime('%Y-%m-%d %I:%M:%S %p')
         }
       }
+    elsif user_signed_in? && current_user.instructor
+      redirect_to '/courses'
     end
+  end
+
+  # The GET request sets the unselects course global variable and reloads the home page
+  def courses
+    unless user_signed_in? && current_user.instructor
+      render :nothing => true, :status => :unauthorized
+    end
+    
+    $selected_course = nil
+
+    @courses = current_user.instructor.courses.collect{ |course|
+      {
+        name: course.name,
+        id: course.id
+      }
+    }
+
+    render :template => "home/index"
+  end
+
+  # The POST request sets the selected course global variable and reloads the home page
+  def course
+    unless user_signed_in? && current_user.instructor
+      render :nothing => true, :status => :unauthorized
+    end
+    
+    $selected_course = Course.where({id: params[:id]}).first
+
+    @course_projects = $selected_course.projects.collect{ |project|
+      {
+        project_name: project.name,
+        team_names: project.teams.reduce(''){|names, team| names + team.name + ', '}[0..-3],
+        due: project.due.in_time_zone('Eastern Time (US & Canada)').strftime('%Y-%m-%d %I:%M:%S %p')
+      }
+    }
+
+    render :template => "home/index"
   end
 end
