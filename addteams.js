@@ -9,7 +9,7 @@ var data =
 };
 function testme(click) {
   //alert("team name for elt0: " + data.completed_survey[0].team_name + ", " + "student ids for elt0: " + data.completed_survey[0].student_id.join());
-  alert("team name for elt0 is " + data.completed_survey[0].team_name + ", and the student ids listed under that team are: " + data.completed_survey[0].student_ids[0] + data.completed_survey[0].student_ids[1] + ata.completed_survey[0].student_ids[2] + ata.completed_survey[0].student_ids[3] + ata.completed_survey[0].student_ids[4]);
+  alert("team name for elt0 is " + data.completed_survey[0].team_name + ", and the student ids listed under that team are: " + data.completed_survey[0].student_ids[0] + data.completed_survey[0].student_ids[1] + data.completed_survey[0].student_ids[2] + data.completed_survey[0].student_ids[3] + data.completed_survey[0].student_ids[4]);
 }
 
 function setstudent(student){
