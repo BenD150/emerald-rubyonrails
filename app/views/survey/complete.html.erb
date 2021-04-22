@@ -1,20 +1,16 @@
 
 
-  <pre><h1> 
-  Overall Rating of Teammates: </h1></pre>
-<pre>
+<pre><h3> 
+  Overall Rating of Teammates:
+</h3></pre>
 
-</pre>
 <table>
   <caption>Please rate each team member from 1-5, (5 being the best score):</caption>
   <tr>
     <td></td>
-    
-    <th scope="col"> Student 1 </th>
-    
-    <th scope="col"> Student 2 </th>
-    
-    <th scope="col"> Student 3 </th>
+    <% @students.each do |student| %>
+        <th scope="col"> <%= student[:name] %> </th>
+    <% end %>
   </tr>
 
   <tr>
@@ -40,12 +36,10 @@
   - Unable or unwilling to develop knowledge or skills to contribute to the team.
   - Unable to perform any of the duties of other team members.
   </pre></th>
-    
-    <td><div class="placeholder" onclick="reset_score1('0')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score1('1')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score1('2')"><input type="checkbox" name="motivation_score" value="box"></div></td>
+
+    <% @students.each_with_index do |student, i| %>
+        <td><div class="placeholder" onclick="set_score(1,<%= i %>)"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% end %>
     
   </tr>
 
@@ -55,11 +49,9 @@
   - Demonstrates behaviors described immediately above and below.
   </pre></th>
     
-    <td><div class="placeholder" onclick="reset_score2('0')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score2('1')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score2('2')"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% @students.each_with_index do |student, i| %>
+        <td><div class="placeholder" onclick="set_score(2,<%= i %>)"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% end %>
     
   </tr>
 
@@ -87,11 +79,9 @@
   - Able to perform some of the tasks normally done by other team members.
   </pre></th>
     
-    <td><div class="placeholder" onclick="reset_score3('0')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score3('1')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score3('2')"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% @students.each_with_index do |student, i| %>
+        <td><div class="placeholder" onclick="set_score(3,<%= i %>)"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% end %>
     
   </tr>
 
@@ -100,11 +90,9 @@
   - Demonstrates behaviors described immediately above and below.
   </pre></th>
     
-    <td><div class="placeholder" onclick="reset_score4('0')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-  
-    <td><div class="placeholder" onclick="reset_score4('1')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score4('2')"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% @students.each_with_index do |student, i| %>
+        <td><div class="placeholder" onclick="set_score(4,<%= i %>)"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% end %>
     
   </tr>
 
@@ -132,81 +120,38 @@
   - Able to perform the role of any team member if necessary.
   </pre></th>
     
-    <td><div class="placeholder" onclick="reset_score5('0')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score5('1')"><input type="checkbox" name="motivation_score" value="box"></div></td>
-    
-    <td><div class="placeholder" onclick="reset_score5('2')"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% @students.each_with_index do |student, i| %>
+        <td><div class="placeholder" onclick="set_score(5,<%= i %>)"><input type="checkbox" name="motivation_score" value="box"></div></td>
+    <% end %>
     
   </tr>
 
 </table>
 
-<br>
-    <form> <pre>
-    Name: Student 1
-    Comments: </pre>
-    <input type="text" comments="Comments" size="100">
-    </form>
-<br>
-<br>
-    <form> <pre>
-    Name: Student 2
-    Comments: </pre>
-    <input type="text" comments="Comments" size="100">
-    </form>
-<br>
-<br>
-    <form> <pre>
-    Name: Student 3
-    Comments: </pre>
-    <input type="text" comments="Comments" size="100">
-    </form>
-<br>
-<!--<button onclick="event1"> submit </button>-->
-<button onclick="testme()"> check the update </button>
+    <% @students.each_with_index do |student, i| %>
+        <br>
+            <form> <pre>
+            Name: <%= student[:name] %>
+            Comments: </pre>
+            <input type="text" comments="Comments" size="100" onkeypress="set_comment(this, <%= i %>)">
+            </form>
+        <br>
+    <% end %>
+
+<button onclick="post_survey()"> check the update </button>
 
 <script>
-var data = 
-{ completed_survey:  
-  [
-    {   comment: "hi",
-        score: 7,
-        student_id: 0
-    },  
-    {
-        comment: "hi",
-        score: 7,
-        student_id: 1
-    },
-    {
-        comment: "hi",
-        score: 7,
-        student_id: 2
-    }    
-  ]
-};
-function testme(click) {
-  alert("current student 0 score: " + data.completed_survey[0].score + ", " + "current student 1 score: " + data.completed_survey[1].score + ", " + "current student 2 score:" + data.completed_survey[2].score);
+var data = JSON.parse('<%= @data %>'.replace(/&quot;/g,'"'));
+
+function set_score(score, i){
+    data.completed_survey[i].score = score;
 }
 
-function reset_score1(student){
-  data.completed_survey[student].score = 1;
+function set_comment(e, i){
+    data.completed_survey[i].comment = e.value;
 }
 
-function reset_score2(student){
-  data.completed_survey[student].score = 2;
-}
-
-function reset_score3(student){
-  data.completed_survey[student].score = 3;
-}
-
-function reset_score4(student){
-  data.completed_survey[student].score = 4;
-}
-
-function reset_score5(student){
-  data.completed_survey[student].score = 5;
+async function post_survey() {
+    res = await (await fetch('/survey/complete', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
 }
 </script>
