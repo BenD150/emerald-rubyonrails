@@ -2,7 +2,7 @@
 
 </pre>
 <table>
-  <caption>Please, before selecting any students, type in the name of the team you wish to create: <pre>
+  <caption>Please, before selecting any students, type in the name of the team you wish to create and press the "Register Team Name" button: <pre>
   
   
   </pre></caption>
@@ -14,14 +14,14 @@
 
     <td>
     <form action = "begin-create-done.html" method="get">
-    Team Name: <!--<input type="text" name="teamname" onkeyup="formChanged()" onchange="formChanged()"/>
-    <button onclick="formChanged(click)" data-inline = "true" >Register Team Name</button>-->
+    Team Name: <input type="text" name="teamname" onkeyup="formChanged()" onchange="formChanged()"/>
+    <button onclick="formChanged(click)" data-inline = "true" >Register Team Name</button>
     </form>
 
     <form action="someAction" method="post">
       <input type="text" name="text" id="text"/>
 
-      <!--<input type="text" name="value" id="value">-->
+      <input type="text" name="value" id="value">
     </form>
     </td>
 
@@ -83,8 +83,8 @@ var data =
 };
 var myVar=setInterval(function(){getValue()},5000);
 function getValue() {
-  //document.getElementById("value").value=document.getElementById("text").value;
-  data.completed_survey[0].team_name = document.getElementById("text").value;
+  document.getElementById("value").value=document.getElementById("text").value;
+  data.completed_survey[0].team_name = myVar;
 }
 function testme(click) {
   //alert("team name for elt0: " + data.completed_survey[0].team_name + ", " + "student ids for elt0: " + data.completed_survey[0].student_id.join());
