@@ -1,0 +1,15 @@
+<br><pre>    
+  <caption> Peer Evaluation Results: </caption></pre>
+    <pre>
+    Team Name: <%= @survey[:team_name] %>
+    Project Name: <%= @survey[:project_name] %>
+    Rating given to self: <%= @survey[:score_for_self] %>
+    Rating given by team members (average): <%= @survey[:average_score_from_teammates] %>
+    Comments From Team Members:
+    <ul>
+        <% @survey[:comments].each do |comment| %>
+            <li><%= comment %></li>
+        <% end %>
+    </ul>
+    </pre>
+<br>
