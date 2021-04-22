@@ -17,51 +17,6 @@ the more indication of an issue. then underneath each name is another drop down 
   <script src="scores.js"></script>
   <meta charset= "UTF-8">
   <title> Student Evaluation Feedback Overview </title>
-  <style>
-  /* Dropdown Button */
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
-  </style>
 </head>
 <body onload="loadProblemStudents()">
   <p align="right"><button onclick="event1" data-inline = "true" >Home</button> </p>
@@ -76,17 +31,6 @@ the more indication of an issue. then underneath each name is another drop down 
   <caption>Please select a student within a team listed above to view the member's scores within the specified team. </caption>
 
   <tr>
-
-    <td>
-    <div class="dropdown">
-    <button onclick="dropMenuFunc()" class="dropbtn"> Team 0 </button>
-    <div id = "myDropDown" class="dropdown-content">
-      <a href="#"> Student 1 </a>
-      <a href="#"> Student 2 </a>
-      <a href="#"> Student 3 </a>
-    </td>
-
-
     <td>
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -183,7 +127,7 @@ the more indication of an issue. then underneath each name is another drop down 
     </td>
 
     <td>
-    <h1> Problematic Students are as follows:  <span id="myText"></span></h1> 
+    <h1> "Problematic Students are as follows: " <span id="myText"></span></h1> 
     </td>
   </tr>
 
