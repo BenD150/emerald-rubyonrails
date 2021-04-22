@@ -1,1 +1,45 @@
 <p><%= @teams.to_json %></p>
+
+<pre>
+
+</pre>
+
+<caption><pre>  Please add the team name and project name you would like to create to assign the specified team the project you create.</pre></caption>
+<table>
+  
+  <tr>
+    <th scope="col"> </th>
+  </tr>
+
+  <tr>
+    <th scope="row">
+
+  <form action = "begin-create-done.html" method="get">
+  Project Name: <input type="text" name="projectname" onkeyup="formChanged1()" onchange="formChanged1()"/>
+  <button onclick="formChanged1(click)" data-inline = "true" >Project Name</button>
+  </form>
+
+  <form action = "begin-create-done.html" method="get">
+  Team Name: <input type="text" name="teamname" onkeyup="formChanged2()" onchange="formChanged2()"/>
+  <button onclick="formChanged2(click)" data-inline = "true" >Team Name</button>
+  </form>
+
+
+    </th>
+  </tr>
+
+</table>
+
+<script>
+var data = {
+  project_name: "",
+  team_ids: []
+}
+
+function formChanged1(click) {
+  data.team_ids.push(document.getElementsByName("projectname").value);
+}
+function formChanged2(click) {
+  data.project_name = document.getElementsByName("teamname").value;
+} 
+</script>
