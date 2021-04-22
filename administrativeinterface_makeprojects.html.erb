@@ -23,7 +23,7 @@
 
   <tr>
     <th scope="row">
-    <form>
+    <!--<form>
   <div class="form-group">
     <label for="exampleInputEmail1">Project Name</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter project name">
@@ -34,7 +34,17 @@
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter team to assign project">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form>-->
+
+  <form action = "begin-create-done.html" method="get">
+  Project Name: <input type="text" name="projectname" onkeyup="formChanged1()" onchange="formChanged1()"/>
+  <button onclick="formChanged1(click)" data-inline = "true" >Project Name</button>
+  </form>
+
+  <form action = "begin-create-done.html" method="get">
+  Team Name: <input type="text" name="teamname" onkeyup="formChanged2()" onchange="formChanged2()"/>
+  <button onclick="formChanged2(click)" data-inline = "true" >Team Name</button>
+  </form>
 
 
     </th>
