@@ -53,6 +53,10 @@
   display: none;
 }
 
+.problematicsurvey-results {
+  display: block;
+}
+
 .survey-result {
   margin: 10px;
   padding: 10px;
@@ -61,17 +65,12 @@
 </style>
 
 <div>
-  <br><pre>    
-
-  <caption> Team Evaluation Results: </caption></pre>
-  <pre>
-
-  </pre>
-  <p>Please select a student within a team listed above to view the member's scores within the specified team. </p>
+  <br><h1>Team Evaluation Results: </h1>
+  
+  <p>Please select a student within a team listed to view the member's scores within the specified team. </p>
   <table>
 
     <tr>
-
       <% @data.each do |team_id, team| %>
         <td>
         <div class="dropdown">
@@ -80,13 +79,71 @@
           <% team[:students].each do |student_id, student| %>
             <a onclick=<%="display_surveys("+team_id.to_s+","+student_id.to_s+")"%>> <%= student[:name] %> </a>
           <% end %>
+        </div>
+        </div>
+
+        <pre>    
+          <p>Selected Team: <span id="selected_team"></span></p>
+          <p>Selected Student: <span id="selected_student"></span></p>
+          </pre>
+
+          <% @data.each do |team_id, team| %>
+              <% team[:students].each do |student_id, student| %>
+
+                <div class="survey-results" id=<%="survey_results_"+team_id.to_s+"_"+student_id.to_s%>>
+
+                <% student[:survey_results].each do |survey_result| %>
+
+                  <div class="survey-result">
+                    <p>Project name: <%= survey_result[:project_name] %></p>
+                    <p>Rating given to self: <%= survey_result[:score_for_self] %></p>
+                    <p>Rating given by team members (average): <%= survey_result[:average_score_from_teammates] %></p>
+                    <p>Comments from team members:</p>
+                    <ul>
+                      <% survey_result[:comments].each do |comment|%>
+                        <li><%= comment %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+
+                <% end %>
+
+                </div>
+              <% end %>
+          <% end %>
+
+
         </td>
       <% end %>
 
-      <td>
+      <td VALIGN="TOP">
       <table id="t01">
       <tr>
-      <h1 style="font-size:18px;"> Problematic Students are as follows:  <span id="myText"></span></h1> 
+      <h1 style="font-size:18px"> Problematic Students:  </h1>
+      <% @data.each do |team_id, team| %>
+          <% team[:students].each do |student_id, student| %>
+            
+            <div class="problematicsurvey-results" id=<%="survey_results_"+team_id.to_s+"_"+student_id.to_s%>>
+
+            <% student[:survey_results].each do |survey_result| %>
+              <% if survey_result[:average_score_from_teammates] <= 6%>
+                <div class="survey-result">
+                  <p>Project name: <%= survey_result[:project_name] %></p>
+                  <p>Rating given to self: <%= survey_result[:score_for_self] %></p>
+                  <p>Rating given by team members (average): <%= survey_result[:average_score_from_teammates] %></p>
+                  <p>Comments from team members:</p>
+                  <ul>
+                    <% survey_result[:comments].each do |comment|%>
+                      <li><%= comment %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            <% end %>
+
+            </div>
+          <% end %>
+      <% end %> 
       </tr>
       </table>
       </td>
@@ -94,36 +151,7 @@
 
   </table>
 
-  <pre>    
-  <p>Selected Team: <span id="selected_team"></span></p>
-  <p>Selected Student: <span id="selected_student"></span></p>
-  </pre>
-
-  <% @data.each do |team_id, team| %>
-      <% team[:students].each do |student_id, student| %>
-
-        <div class="survey-results" id=<%="survey_results_"+team_id.to_s+"_"+student_id.to_s%>>
-
-        <% student[:survey_results].each do |survey_result| %>
-
-          <div class="survey-result">
-            <p>Project name: <%= survey_result[:project_name] %></p>
-            <p>Rating given to self: <%= survey_result[:score_for_self] %></p>
-            <p>Rating given by team members (average): <%= survey_result[:average_score_from_teammates] %></p>
-            <p>Comments from team members:</p>
-            <ul>
-              <% survey_result[:comments].each do |comment|%>
-                <li><%= comment %></li>
-              <% end %>
-            </ul>
-          </div>
-
-        <% end %>
-
-        </div>
-      <% end %>
-  <% end %>
-
+  
 </div>
 
 <script>
