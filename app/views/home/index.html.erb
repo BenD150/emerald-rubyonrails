@@ -57,9 +57,33 @@
         <li><a href=<%= '/course?id='+course[:id].to_s %>><%= course[:name] %></a></li>
       <% end %>
     </ul>
+
+    <br>
+    <p>Add a course to manage:</p>
+    <textarea spellcheck="false" rows="5" cols="50" onkeyup="set_text(this)"></textarea>
+    <button onclick="post_courses()" data-inline = "true" >Submit</button>
   <% end %>
 <% elsif user_signed_in? %>
   <p>Ask your instructors to add you to a course to complete evalutations.</p>
 <% else %>
   <p>Please sign in or register to complete or create evalutations.</p>
 <% end %>
+
+<script>
+var data = {
+  text: null
+};
+
+function set_text(e, i){
+    data.text = e.value;
+}
+
+async function post_courses() {
+    const res = await fetch('/courses', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}});
+    if (res.ok) {
+      window.location.replace("/courses");
+    } else {
+      alert('Courses upload failed, please check formatting and try again.')
+    }
+}
+</script>
