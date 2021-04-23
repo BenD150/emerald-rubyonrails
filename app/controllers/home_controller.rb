@@ -1,6 +1,7 @@
 # This controller generates the homepage using a GET request
 class HomeController < ApplicationController
   protect_from_forgery except: :select
+  protect_from_forgery except: :create
   require 'date'
 
 
@@ -68,7 +69,15 @@ class HomeController < ApplicationController
   def create
     course_name = params[:text].to_s
     course = Course.create(name: course_name)
-    CourseInstructor.create(course: course, instructor: User.last.instructor)
+    CourseInstructor.create(course: course, instructor: current_user.instructor)
+
+    @courses = current_user.instructor.courses.collect{ |course|
+      {
+        name: course.name,
+        id: course.id
+      }
+    }
+
     render :template => "home/index"
   end
 
