@@ -1,28 +1,37 @@
-<table>
-  <caption>Please, before selecting any students, type in the name of the team you wish to create. </caption>
-  <tr>
-    <td></td>
-    <td></td>
-    
-    <th scope="col"></th>
+<style>
+  .flex-container {
+    display: flex;
+    background-color: white;
+  }
+  .flex-item {
+    background-color: white;
+    width: 400px;
+    margin: 10px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+  }
+</style>
 
-    <td>
-      <p>Team Name:</p>
-      <input type="text" onkeyup="set_team_name(this)"/>
-    </td>
-
-  </tr>
-
-  <% @students.each_with_index do |student, i| %>
-    <tr>
-      <th scope="row"><pre> <%= student[:name] %>
-    </pre></th>
-      <td><div class="placeholder"><input type="checkbox" name="motivation_score" value="box" onclick="set_student(<%= student[:student_id] %>, this)"></div></td>
-    </tr>
-  <% end %>
-
-</table>
-<button onclick="post_team()"> Submit </button>
+<div class="flex-container">
+  <div class="flex-item">  
+      <% @students.each_with_index do |student, i| %>
+        <pre><%= student[:name] %></pre>
+        <div class="checkboxoption">
+          <input type="checkbox" name="motivation_score" value="box" onclick="set_student(<%= student[:student_id] %>, this)">
+        </div>
+      <% end %>
+  </div>
+  <div class="flex-item"> 
+    <div class="flex-item">
+      <p>Team Name:</p> <input type="text" onkeyup="set_team_name(this)"/> 
+    </div>
+    <div class="flex-item"> 
+      <p>Please type in team name before selecting students.</p> 
+      <button onclick="post_team()"><p>Submit</p></button>
+    </div> 
+  </div>
+</div>
 
 <script>
 var data = {
