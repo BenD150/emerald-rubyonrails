@@ -43,10 +43,10 @@ class StudentController < ApplicationController
         if is_instructor && !instructor
           if user
             # if corresponding user exists, reference this new instructor
-            instructor = Instructor.create(email: email, user: user)
+            instructor = Instructor.create(first: first, last: last, email: email, user: user)
           else
             # otherwise, assume we will add the user reference later when the user is created
-            instructor = Instructor.create(email: email)
+            instructor = Instructor.create(first: first, last: last, email: email)
           end
 
         # if student doesn't exist, create
