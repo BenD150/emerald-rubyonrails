@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/course', to: 'home#course'
   get '/courses', to: 'home#courses'
+  post '/courses', to: 'home#create'
 
   get '/students', to: 'student#index'
   post '/students', to: 'student#create'

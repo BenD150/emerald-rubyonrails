@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   protect_from_forgery except: :select
   require 'date'
 
+
   # The GET request must render the
   #   - projects, if student
   #   - courses, if instructor and no course selected
@@ -61,4 +62,16 @@ class HomeController < ApplicationController
 
     render :template => "home/index"
   end
+
+
+  # The POST request that creates a new course belonging to an instructor
+  def create
+    course_name = params[:text].to_s
+    course = Course.create(name: course_name)
+    CourseInstructor.create(course: course, instructor: User.last.instructor)
+    render :template => "home/index"
+  end
+
 end
+
+
