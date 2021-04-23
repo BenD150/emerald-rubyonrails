@@ -1,4 +1,17 @@
 <style>
+.flex-container {
+    display: flex;
+    background-color: white;
+  }
+  .flex-item {
+    background-color: white;
+    width: 400px;
+    margin: 10px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+  }
+
   /* Dropdown Button */
 .dropbtn {
   background-color: #3498DB;
@@ -64,15 +77,11 @@
 }
 </style>
 
-<div>
-  <br><h1>Team Evaluation Results: </h1>
-  
-  <p>Please select a student within a team listed to view the member's scores within the specified team. </p>
-  <table>
-
-    <tr>
-      <% @data.each do |team_id, team| %>
-        <td>
+<h1>Team Evaluation Results: </h1>  
+<p>Please select a student within a team listed to view the member's scores within the specified team. </p>
+<div class="flex-container">
+  <% @data.each do |team_id, team| %>
+  <div class="flex-item">  
         <div class="dropdown">
         <button onclick=<%= "open_dropdown(" + team_id.to_s + ")"%> class="dropbtn"> <%= team[:name] %> </button>
         <div id=<%= "dropdown_" + team_id.to_s %> class="dropdown-content">
@@ -85,7 +94,7 @@
         <pre>    
           <p>Selected Team: <span id="selected_team"></span></p>
           <p>Selected Student: <span id="selected_student"></span></p>
-          </pre>
+        </pre>
 
           <% @data.each do |team_id, team| %>
               <% team[:students].each do |student_id, student| %>
@@ -111,20 +120,13 @@
                 </div>
               <% end %>
           <% end %>
-
-
-        </td>
-      <% end %>
-
-      <td VALIGN="TOP">
-      <table id="t01">
-      <tr>
-      <h1 style="font-size:18px"> Problematic Students:  </h1>
+  </div>
+  <% end %>
+  <div class="flex-item"> 
+    <h1 style="font-size:18px"> Problematic Students:  </h1>
       <% @data.each do |team_id, team| %>
           <% team[:students].each do |student_id, student| %>
-            
             <div class="problematicsurvey-results" id=<%="survey_results_"+team_id.to_s+"_"+student_id.to_s%>>
-
             <% student[:survey_results].each do |survey_result| %>
               <% if survey_result[:average_score_from_teammates] <= 6%>
                 <div class="survey-result">
@@ -140,18 +142,10 @@
                 </div>
               <% end %>
             <% end %>
-
             </div>
           <% end %>
       <% end %> 
-      </tr>
-      </table>
-      </td>
-    </tr>
-
-  </table>
-
-  
+  </div>
 </div>
 
 <script>
