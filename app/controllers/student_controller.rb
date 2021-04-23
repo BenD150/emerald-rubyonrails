@@ -28,9 +28,7 @@ class StudentController < ApplicationController
         first = name[0]
         last = name[1]
         is_instructor = student_info[2] == "Instructor"
-        puts "******************************************************************"
-        puts student_info
-        puts is_instructor
+
         student = Student.where(email: email).first
         instructor = Instructor.where(email: email).first
         user = User.where(email: email).first

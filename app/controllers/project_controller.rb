@@ -3,6 +3,7 @@ class ProjectController < ApplicationController
   require 'date'
   protect_from_forgery except: :create
   before_action :authenticate_user!
+  before_action :select_course!
 
   # The GET request renders all the teams in the current course
   def index

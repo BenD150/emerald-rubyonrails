@@ -51,6 +51,11 @@ function set_student(student_id, e){
 }
 
 async function post_team() {
-  res = await (await fetch('/teams', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
+  const res = await fetch('/teams', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}});
+    if (res.ok) {
+      window.location.replace("/course?id=<%= $selected_course.id %>");
+    } else {
+      alert('Team creation failed, please check formatting and try again.')
+    }
 }
 </script>

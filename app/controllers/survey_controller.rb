@@ -34,7 +34,7 @@ class SurveyController < ApplicationController
       Score.create(value: item[:score],survey: survey,written_for: written_for)
     end
 
-    render json: { length: Score.all.length }
+    render json: { success: true }
   end
 
   # The GET request renders the results of this particular survey

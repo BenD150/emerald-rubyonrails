@@ -68,6 +68,11 @@ function set_team(team_id, e){
 
 async function post_project() {
   data.due_date = date + 'T' + time;
-  res = await (await fetch('/projects', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
+  const res = await fetch('/projects', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}});
+    if (res.ok) {
+      window.location.replace("/course?id=<%= $selected_course.id %>");
+    } else {
+      alert('Project assignment failed, please check formatting and try again.')
+    }
 }
 </script>

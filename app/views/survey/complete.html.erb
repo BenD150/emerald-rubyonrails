@@ -152,6 +152,7 @@ function set_comment(e, i){
 }
 
 async function post_survey() {
-    res = await (await fetch('/survey/complete', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}})).json();
+    const res = await fetch('/survey/complete', {method: "POST", body: JSON.stringify(data), headers: {'Content-Type':'application/json'}});
+    if (res.ok) window.location.replace("/");
 }
 </script>
