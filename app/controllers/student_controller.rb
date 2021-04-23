@@ -31,6 +31,12 @@ class StudentController < ApplicationController
 
         student = Student.where(email: email).first
         instructor = Instructor.where(email: email).first
+        # add name if we can
+        if instructor
+          instructor.first = first
+          instructor.last = last
+          instructor.save
+        end
         user = User.where(email: email).first
 
         # if instructor doesn't exist, create
@@ -44,7 +50,7 @@ class StudentController < ApplicationController
           end
 
         # if student doesn't exist, create
-        elsif !student
+        elsif !is_instructor && !student
           if user
             # if corresponding user exists, reference this new student
             student = Student.create(first: first, last: last, email: email, user: user)

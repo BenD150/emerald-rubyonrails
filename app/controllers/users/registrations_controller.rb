@@ -14,10 +14,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do
       user = User.where(email: params[:user][:email]).first
 
-      instructor = Instructor.where(email: params[:user][:email]).first
-      if instructor
-        instructor.user = user
-        instructor.save
+      if params[:instructor_check] == '1'
+        instructor = Instructor.where(email: params[:user][:email]).first
+        if instructor
+          instructor.user = user
+          instructor.save
+        else
+          Instructor.create(email: params[:user][:email], user: user)
+        end
       end
 
       student = Student.where(email: params[:user][:email]).first
