@@ -128,7 +128,7 @@
           <% team[:students].each do |student_id, student| %>
             <div class="problematicsurvey-results" id=<%="survey_results_"+team_id.to_s+"_"+student_id.to_s%>>
             <% student[:survey_results].each do |survey_result| %>
-              <% if survey_result[:average_score_from_teammates] <= 6%>
+              <% if survey_result[:average_score_from_teammates].is_a?(Integer) && survey_result[:average_score_from_teammates] <= 6%>
                 <div class="survey-result">
                   <p>Project name: <%= survey_result[:project_name] %></p>
                   <p>Rating given to self: <%= survey_result[:score_for_self] %></p>
