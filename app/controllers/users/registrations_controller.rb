@@ -12,13 +12,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do
-      if params[:instructor_check] == '1'
-        Instructor.create(user: current_user)
+      user = User.where(email: params[:user][:email]).first
+
+      instructor = Instructor.where(email: params[:user][:email]).first
+      if instructor
+        instructor.user = user
+        instructor.save
       end
-      
-      student = Student.where(email: current_user.email).first
+
+      student = Student.where(email: params[:user][:email]).first
       if student
-        student.user = current_user
+        student.user = user
         student.save
       end
     end

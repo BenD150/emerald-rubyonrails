@@ -58,7 +58,8 @@
       <% end %>
     </ul>
   <% end %>
+<% elsif user_signed_in? %>
+  <p>Ask your instructors to add you to a course to complete evalutations.</p>
 <% else %>
   <p>Please sign in or register to complete or create evalutations.</p>
-  <%= @current_user %>
 <% end %>
