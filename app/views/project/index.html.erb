@@ -1,32 +1,38 @@
-<table>
-  <caption>Please, before selecting any teams, fill out the project description form. </caption>
-  <tr>
-    <td></td>
-    <td></td>
-    
-    <th scope="col"></th>
+<style>
+  .flex-container {
+    display: flex;
+    background-color: white;
+  }
+  .flex-item {
+    background-color: white;
+    width: 400px;
+    margin: 10px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+  }
+</style>
 
-    <td>
-      <p>Project Name:</p>
+<div class="flex-container">
+  <div class="flex-item">  
+    <p>Project Name:</p>
       <input type="text" onkeyup="set_project_name(this)"/>
       <p>Due Date (YYYY-MM-DD):</p>
       <input type="text" onkeyup="set_project_date(this)"/>
       <p>Due Time (HH:MM:SS):</p>
       <input type="text" onkeyup="set_project_time(this)"/>
-    </td>
-
-  </tr>
-
-  <% @teams.each_with_index do |team, i| %>
-    <tr>
-      <th scope="row"><pre> <%= team[:team_name] %>
-    </pre></th>
-      <td><div class="placeholder"><input type="checkbox" name="motivation_score" value="box" onclick="set_team(<%= team[:team_id] %>, this)"></div></td>
-    </tr>
-  <% end %>
-
-</table>
-<button onclick="post_project()"> Submit </button>
+  </div>
+  <div class="flex-item"> 
+      <% @teams.each_with_index do |team, i| %>
+      <p> <%= team[:team_name] %> </p>
+      <div class="placeholder"><input type="checkbox" name="motivation_score" value="box" onclick="set_team(<%= team[:team_id] %>, this)"></div>
+    <% end %>
+  </div>
+  <div class="flex-item"> 
+      <p>Please, before selecting any teams, fill out the project description form.</p>
+      <button onclick="post_project()"> Submit </button>
+  </div>
+</div>
 
 <script>
 var data = {
