@@ -11,14 +11,14 @@ We recreated the "CATME Peer Evaluation" as the "Emerald Peer Evaluation Tool". 
 - A student can be a part of multiple groups simultaneously
 - This tool can link a brand new registered user to an existing team if the email matches the one that the instructor provided 
 
-#Building the Site
+# Building the Site
 To build the site, complete the following steps:
 1. Clone the repository
 2. `cd emerald-rubyonrails`
 3. Install bundler with `gem install bundler`
 4. Now, move onto the PostgreSQL Installation and Database Creation sections to continue set-up
 
-#PostgreSQL Installation
+# PostgreSQL Installation
 We decided to use PostgreSQL to make deploying to Heroku easier. The following commands MUST be entered in the terminal in the project directory to avoid running into errors when doing `bundle install`:
 1. `apt show postgresql`
 2. `sudo apt install postgresql postgresql-contrib`
@@ -26,23 +26,23 @@ We decided to use PostgreSQL to make deploying to Heroku easier. The following c
 4. `sudo apt install postgresql-contrib libpq-dev`
 5. `bundle install` should work properly now. Move onto the Database Creation section below.
 
-#Database Creation
+# Database Creation
 After PostgreSQL has been installed and `bundle install` works successfully, do the following commands in the project directory:
 1. `sudo -u postgres psql`
 2. `ALTER USER postgres PASSWORD 'MyPassword';`
 3. Type `\q` to exit the Postgres console 
 4. `rake db:setup`
 
-#Database Seeding
+# Database Seeding
 After PostgreSQL has been installed and the database has been created successfully, run the following commands if you wish to put sample data in the database:
 1. `rails db:seed`
 
-#Starting the Rails Server 
+# Starting the Rails Server 
 After ALL of the previous steps have been completed, run the following command to start the rails server:
 1. `rails s`
 2. While the server is running, navigate to http://localhost:3000 to see the Emerald Peer Evaluation Tool
 
-#Utilizing the Seeded Data
+# Utilizing the Seeded Data
 If you chose to seed the sample data into the database, here is some information that may be useful to you:
 - A student account is available to use with the login information of:
   * Username: salem.105@osu.edu
@@ -54,28 +54,28 @@ If you chose to seed the sample data into the database, here is some information
     
 In addition to these accounts, there is other useful data in the database including sample projects, survey scores, and comments. It can all be seen in the `seeds.rb` file. 
 
-#Heroku Access
+# Heroku Access
 The site is also deployed to Heroku. It can be navigated to with the following link:
 - cse-3901-final-project.herokuapp.com
 
 It includes all of the seeded data described above.
 
-#Ruby version
+# Ruby version
 The version of Ruby used is Ruby 2.6.6p146 (2020-03-31 revision 67876) [x86_64-linux]
-#System dependencies
+# System dependencies
 There are a few system dependencies for the peer evaluation tool, including:
 - Ruby on Rails
 - Devise (gem for authentication)
 - Postgres for database creation and initialization
 
-## Testing
+# Testing
 Thorough testing was done for each GET and POST endpoint in the `routes.rb` file, along with the rendering of each page's components.
 
-## Style
+# Style
 
 Style based off of HTML, CSS, [Ruby](http://ruby-doc.org/), and Ruby on Rails standards. In addition, flex box is used to style items on each HTML page.
 
-## Code Organization
+# Code Organization
 File sections include:
 * Models: Held relations of the database. See the `Peer Eval Tool - Database Diagram` image in the repository for a more in-depth view of the database.
 * Controllers: 
