@@ -8,7 +8,7 @@ application up and running.
 Zach Salem, Julia Kolnicki, Ben Dollenmayer
 
 # Ruby version
-
+The version of Ruby used is Ruby 2.6.6p146 (2020-03-31 revision 67876) [x86_64-linux]
 # System dependencies
 
 # Configuration
@@ -17,7 +17,14 @@ Zach Salem, Julia Kolnicki, Ben Dollenmayer
 
 # Database initialization
 
+1. write "rails db:seed" in the terminal
+
 # How to run the test suite
+
+2. and then "rails s"
+3. follow the link generated in the terminal
+4. sign in as an instructor (giles.25@osu.edu, Password1!) or a student (make your own by registering)
+5. if you signed in as a student, you must sign in as an instructor to add the student to the course before signing in and seeing more of the student's features
 
 # Services (job queues, cache servers, search engines, etc.)
 
@@ -25,10 +32,12 @@ Zach Salem, Julia Kolnicki, Ben Dollenmayer
 
 # The Game of Set - Reloaded
 
-We recreated the Game of Set from Project 2, but this time using HTML/CSS/JS. This game includes a few extra features over the base game, including:
-- both single-player and multi-player gamemodes
-- a timer to race against in single player mode
-- a hint generator that gives up to four hints per game state
+We recreated the "CATME Peer Evaluation" as the "Emerald Peer Evaluation Tool". This site includes a few extra features over the base game, including:
+
+# Extra Credit Features
+
+- Can sign in as multiple different instructors
+- Can add more courses to manage
 
 ## Building the Project
 
@@ -38,26 +47,32 @@ Then, simply open `set.html` in a browser and enjoy!
 
 ## Testing
 
-Simply run `npm run test` to execute all the test cases in `logic.test.js`.
-
 ## Style
 
-Style based off of HTML and CSS standards, as well as idiometic JavaScript.
+Style based off of HTML and CSS standards, as well as idiometic JavaScript. Flex box is used to style items in each html page.
 
 ## Code Organization
 
-Due to the game logic being implemented in JavaScript, it is largely function-based with a few global variables.
+Due to the game logic being implemented in ???, it is largely function-based with a few global variables?
 
 Function sections include:
-* Event Handlers: These get called by various actions the user can perform, including clicking a card or button, or pressing a key
-* Game Logic: These handle the logic of the game of set itself, including generating hints and checking if three cards are a set
-* Graphical State Changers: These toggle which sections are visible, and render the cards and the table
-* Helpers: This single function helps to shuffle a JavaScript array
+* Models: Held relations of the database. 
+* Controllers: 
+*      Application: 
+*       Checks if the signed in user is an instructor and whether or not they have selected a course. 
+*      Home: 
+*       Responsible for rendering the homepage depending on an instructor vs. student, and also lets the instructor add new courses.
+*      Student: 
+*       Allows an instructor to create students from their own roster and add them to the currently selected course.
+*      Team: 
+*       Gets all of the students in the current course and allows an instructor to create a team and add the selected students to that team.
+*      Project:
+*       Renders all of the teams and allows an instructor to create a new project and add teams to it.
+*      Survey: 
+*       Renders a particular student’s teammates and creates surveys that are filled out by the signed in student.
+*      Stat: 
+*       Responsible for rendering the statistics for each student’s survey and gives the instructor an overall view of the team’s performance. 
+* Views: Held the html for the display of each page with embedded ruby and the javascript at the end of the files for the interactive components.
 
-Global variables include:
-* `deck`: An arry of cards still in the deck
-* `table`: An array of cards that are currently on the table
-* `mode`: 1 for single-player and 2 for multi-player
-* `player`: The player that is currently entering a set, always 1 in single-player mode
-* `hint_count`: The number of hints to show when the player next asks for one
-* `picks`: The indexes of the cards currently picked from the table
+Global variables include?:
+* 
