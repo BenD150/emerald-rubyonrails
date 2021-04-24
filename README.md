@@ -3,31 +3,25 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-Old readme to edit is below:
-
 <h1><img src="https://cdn1.iconfinder.com/data/icons/business-analytics-6/91/Business_analytics_15-512.png" width="40" height="40"> Team Emerald <img src="https://cdn1.iconfinder.com/data/icons/business-analytics-6/91/Business_analytics_15-512.png" width="40" height="40"></h1>
 
-Zach Salem, Julia Kolnicki, Ben Dollenmayer, Lisa Hall
+Zach Salem, Julia Kolnicki, Ben Dollenmayer
+
+# Ruby version
+
+# System dependencies
+
+# Configuration
+
+# Database creation
+
+# Database initialization
+
+# How to run the test suite
+
+# Services (job queues, cache servers, search engines, etc.)
+
+# Deployment instructions
 
 # The Game of Set - Reloaded
 
