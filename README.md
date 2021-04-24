@@ -98,6 +98,6 @@ The views include a detailed homepage depending on a student vs. instructor, a s
     * `survey/complete.html.erb`: Renders the survey that students fill out
     * `survey/view.html.erb`: Allows students to view the results of a completed survey 
     * `team/index.html.erb`: The page where an instructor can add students to teams
-
+  
 Global Variables
 * `$selected_course`: The instructor's currently selected course
