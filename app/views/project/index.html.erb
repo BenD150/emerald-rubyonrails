@@ -25,7 +25,7 @@
   <div class="flex-item"> 
       <% @teams.each_with_index do |team, i| %>
       <p> <%= team[:team_name] %> </p>
-      <div class="placeholder"><input type="checkbox" name="motivation_score" value="box" onclick="set_team(<%= team[:team_id] %>, this)"></div>
+      <div class="checkboxinput"><input type="checkbox" name="motivation_score" value="box" onclick="set_team(<%= team[:team_id] %>, this)"></div>
     <% end %>
   </div>
   <div class="flex-item"> 
